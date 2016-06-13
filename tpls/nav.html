@@ -1,0 +1,92 @@
+<div class="g-nav" ng-controller="navigationController">
+	<!--ms-include-->
+	<nav class="m-nav" avalonctrl="nav">
+		<section class="c-logoBar">
+			<a target="_blank" title="点击返回我的场景页" href="http://my.liveapp.cn">
+				<h1 class="common-editor-logo">
+					<p class="f-hide">场景引擎</p>
+				</h1>
+			</a>
+		</section>
+		<section class="c-toolBar">
+			<div class="c-toolPanel-left">
+				<!--repeat32400671694698498632265590844941-->
+				<a ng-click="createComponent('singleimage')" href="javascript:void(0);" class="u-toolBtn" type="singleimage" title="点击添加" style="display: block;">
+					<div class="u-toolBtn-wrap"> <i class="icon-x20 com-img com-img-left" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/components/image/singleimage/icon-s.png&quot;);"></i>
+						<p>图片</p>
+					</div>
+					<!--ms-if-->
+					<!--ms-if-->
+				</a>
+				<!--repeat32400671694698498632265590844941-->
+				<a ng-click="createComponent('singletext')" href="javascript:void(0);" class="u-toolBtn" type="singletext" title="点击添加" style="display: block;">
+					<div class="u-toolBtn-wrap"> <i class="icon-x20 com-img com-img-left" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/components/text/singletext/icon-s.png&quot;);"></i>
+						<p>文本</p>
+					</div>
+					<!--ms-if-->
+					<!--ms-if-->
+				</a>
+				<!--repeat32400671694698498632265590844941-->
+				<!--ms-if-->
+				<!--repeat32400671694698498632265590844941-->
+				<a href="javascript:void(0);" class="u-toolBtn" type="externallinks" title="" style="display: block;" ng-click="toggleExternalLinks()">
+					<!--ms-if-->
+					<div class="u-toolBtn-wrap">
+						<i class="icon-x20 com-img com-img-left" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/components/links/externallinks/icon-s.png&quot;);"></i>
+						<p>按钮</p>
+					</div>
+					<ul class="u-toolBtn-list" style="display: none;">
+						<li class="u-toolBtn-address" ng-click="createComponent('externallinks')">链接</li>
+						<li class="u-toolBtn-phone" ng-click="createComponent('externallinks')">拨打电话</li>
+						<li class="u-toolBtn-layer" ng-click="createComponent('externallinks')">弹出层</li>
+						<li class="u-toolBtn-link" ng-click="createComponent('externallinks')">跳转页面</li>
+					</ul>
+				</a>
+				<a id="nav2Coms" href="javascript:void(0);" class="u-toolBtn u-toolBtn-coms" title="点击打开/关闭" style="display: block;">
+					<i class="icon-x30 icon-x30-coms"></i>
+					<p>组件库</p>
+					<i class="newcomtip"></i>
+				</a>
+				<a href="javascript:void(0)" class="u-toolBtn u-toolBtn-effect f-pointer">
+					<i class="icon-x24 com-img icon-x24-effect"></i>
+					<p>特效</p>
+				</a>
+			</div>
+			<div class="c-toolPanel-center">
+				<a href="javascript:void(0);" class="u-toolBtn u-tool-music" ng-click="showGlobalAudio()">
+					<i class="icon-x22 icon-x22-nomusic"></i>
+					<div>
+						<p>背景音乐</p>
+					</div>
+				</a>
+			</div>
+			<div class="c-toolPanel-right c-nav-right" style="background-color:rgba(0,0,0,0.15);">
+				<a href="javascript:void(0);" class="u-toolBtn">
+					<i class="icon-x20 icon-x20-save"></i>
+					<!--ms-if-->
+					<p>保存</p>
+				</a>
+				<a href="javascript:void(0);" class="u-toolBtn">
+					<i class="icon-x20 icon-x20-preview"></i>
+					<p>预览</p>
+				</a>
+				<a href="javascript:void(0);" class="u-toolBtn">
+					<i class="icon-x20 icon-x20-publish"></i>
+					<!--ms-if-->
+					<p>发布</p>
+				</a>
+			</div>
+			<div class="c-toolPanel-right">
+				<a href="javascript:void(0);" class="u-toolBtn">
+					<i class="icon-x30 icon-x30-undo"></i>
+					<p style="opacity: 0.8;">撤销</p>
+				</a>
+				<a href="javascript:void(0);" class="u-toolBtn">
+					<i class="icon-x30 icon-x30-redo-disabled"></i>
+					<p style="opacity: 0.2;">恢复</p>
+				</a>
+			</div>
+		</section>
+	</nav>
+	<!--ms-include-end-->
+</div>

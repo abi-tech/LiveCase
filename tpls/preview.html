@@ -1,0 +1,27 @@
+<div class="g-preview" ng-controller="previewController">
+	<!--ms-include-->
+	<section class="pv-container">
+		<section class="m-pv">
+
+			<section ng-click="setCurrentPage($index, page)" ng-class="($index == currentIndex? 'c-ct c-ct-active' : 'c-ct')" draggable="true" style="margin-bottom: 0px; margin-top: 0px;" ng-repeat="page in pages">
+				<div class="close icon-x22 icon-x22-close" ng-click="removePage($index)"></div>
+				<div class="copy icon-x14 icon-x14-copy" title="复制" ng-click="copyPage($index)"></div>
+				<div class="up" ng-click="moveUp($index)"></div>
+				<div class="down" ng-click="moveDown($index)"></div>
+				<nav class="nav">{{ $index + 1 }}</nav>
+				<div class="show" ng-style="page.style" bg-layout="tensile" style="background-color: rgb(255, 255, 255);">
+					<div class="com-preview">
+						<div ng-repeat="component in page.components" preview="1" component-directive></div>
+					</div>
+				</div>
+			</section>
+
+			<section class="c-plus" ng-click="createPage(currentIndex)">
+				<div class="icon-x48 plus">+</div>
+				<div class="text">增加一页</div>
+			</section>
+			<section class="c-plus-bg"></section>
+
+		</section>
+	</section>
+</div>

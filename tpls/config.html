@@ -1,0 +1,531 @@
+<div class="g-config g-config-page" ng-controller="configController">
+    <section class="c-config">
+        <section class="c-config-wapper" ng-class="(currentComponent == null? 'none': '')">
+
+            <header class="c-conf-header" ng-if="currentComponent != null">
+                <div class="c-compnent-icon" style="background-image: url('/static/images/{{ currentComponent.type }}.png?v=1');"></div>
+                <span style="color:#444">{{ currentComponent.name }}</span>
+            </header>
+
+            <div ng-if="(currentPage != null)" config-page-header-directive></div>
+            <div ng-if="(currentPage != null)" config-page-background-directive></div>
+            
+
+            <!-- 图片 -->
+            <div ng-if="(currentComponent != null) && (currentComponent.type == 'singleimage')" section-cropper-directive></div>
+
+            <!-- 文本 -->
+            <section class="c-conf-section z-expand" style="display: block;" ng-if="(currentComponent != null) && (currentComponent.type == 'singletext')">
+
+                <section class="u-conf-section c-singletext" avalonctrl="singletext1ku">
+                    <div class="c-conf-row">
+                        <textarea placeholder="亲，在这里输入文本哦"></textarea>
+                    </div>
+
+                    <div class="c-conf-row c-conf-row-1">
+                        <ul class="u-tab">
+                            <li class="dropdown font-size">
+                                <a class="small"><div class="icon-x16 x-icon-font-size"></div></a>
+                            </li>
+                            <li class="font-color">
+                                <input avalonctrl="colorpicker38370904118951728970747686670673" data-duplex-changed="initCp" class="dropdown font-color" style="color: rgb(255, 255, 255); background: rgb(51, 51, 51);">
+                                <div class="font-color-layer" style="background-color: rgb(51, 51, 51);"></div>
+                                <a class="small"><div class="icon-x16 x-icon-font-color"></div></a>
+                            </li>
+                            <li class="dropdown text-align">
+                                <a class="small"><div class="icon-x16 x-icon-text-align x-icon-center"></div></a>
+                            </li>
+                            <li class="dropdown line-height">
+                                <a class="small"><div class="icon-x16 x-icon-line-height"></div></a>
+                            </li>
+                        </ul>
+
+                        <ul class="dropdown-list" type="font-size-list">
+                            <li value="0">18</li>
+                            <li value="0">20</li>
+                            <li value="0">22</li>
+                            <li value="0">24</li>
+                            <li value="0">26</li>
+                            <li value="0">28</li>
+                            <li value="0">30</li>
+                            <li value="0">32</li>
+                            <li value="0">34</li>
+                            <li value="0">36</li>
+                            <li value="0">38</li>
+                            <li value="0" class="selected">40</li>
+                            <li value="0">42</li>
+                            <li value="0">44</li>
+                            <li value="0">46</li>
+                            <li value="0">48</li>
+                            <li value="0">50</li>
+                            <li value="0">52</li>
+                            <li value="0">54</li>
+                            <li value="0">56</li>
+                            <li value="0">58</li>
+                            <li value="0">60</li>
+                            <li value="0">62</li>
+                            <li value="0">64</li>
+                            <li value="0">72</li>
+                            <li value="0">96</li>
+                            <li value="0">100</li>
+                            <li value="0">200</li>
+                            <li value="0">300</li>
+                            <li value="0">400</li>
+                            <li value="0">500</li>
+                        </ul>
+
+                        <ul class="dropdown-list" type="text-align-list" style="display: none;">
+                            <li>
+                                <a class="small"><div class="icon-x16 x-icon-left"></div></a>
+                            </li>
+                            <li class="selected">
+                                <a class="small"><div class="icon-x16 x-icon-center"></div></a>
+                            </li>
+                            <li>
+                                <a class="small"><div class="icon-x16 x-icon-right"></div></a>
+                            </li>
+                            <li>
+                                <a class="small"><div class="icon-x16 x-icon-justify"></div></a>
+                            </li>
+                        </ul>
+
+                        <ul class="dropdown-list" type="line-height-list" style="display: none;">
+                            <li value="1">1.0</li>
+                            <li value="1">1.15</li>
+                            <li value="1" class="selected">1.5</li>
+                            <li value="2">2.0</li>
+                            <li value="2">2.5</li>
+                            <li value="3">3.0</li>
+                            <li value="3">3.5</li>
+                            <li value="4">4.0</li>
+                            <li value="4">4.5</li>
+                            <li value="5">5.0</li>
+                        </ul>
+                    </div>
+
+                    <div class="c-conf-row c-conf-row-2">
+                        <div class="c-input-box box-lf">
+                            <ul class="u-tab">
+                                <li class="dropdown font-face">
+                                    <a class="small"><div class="icon-x16 x-icon-display x-icon-SimHei"></div></a>
+                                </li>
+                            </ul>
+
+                            <ul class="dropdown-list" type="font-list" style="display: none;">
+                                <li class="x-icon-SimHei selected"></li>
+                                <li class="x-icon-MFShangHei_Noncommercial-ExLight"></li>
+                                <li class="x-icon-maobi-Regular"></li>
+                                <li class="x-icon-SentyMaruko"></li>
+                                <li class="x-icon-DFPWaWaW5"></li>
+                            </ul>
+                        </div>
+                        <div class="c-input-box box-rf">
+                            <ul class="u-tab">
+                                <li>
+                                    <a class="small"><div class="icon-x16 x-icon-b"></div></a>
+                                </li>
+                                <li>
+                                    <a class="small"><div class="icon-x16 x-icon-i"></div></a>
+                                </li>
+                                <li>
+                                    <a class="small"><div class="icon-x16 x-icon-u"></div></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <section id="singleTextHTMLRender" class="f-hide">
+                        <div ms-css-webkit-animation="{{comInsList[4].animeShowClass}}" ms-css-animation="{{comInsList[4].animeShowClass}}" inside-styles="" class="text-wrap" background-type="0" background-layout="center" style="border-color: rgb(204, 204, 204); border-radius: 0px; transform: rotate(0deg); opacity: 1; border-width: 0px; background-image: none; background-color: rgba(225, 225, 225, 0);">
+                            <div class="c-singletext-tips-tpl">
+                                <p>看右边 →_→</p>
+                                <div class="c-singletext-arrow"></div>
+                            </div>
+                            <div class="text-content" font-face="SimHei" style="line-height: 1.5; text-align: center; font-size: 2.5em; font-family: SimHei; color: rgb(51, 51, 51);">右侧输入文本</div>
+                        </div>
+                    </section>
+                </section>
+
+                <div class="c-conf-panel">
+
+                </div>
+            </section>
+
+            <section class="c-conf-section z-expand" style="display: block;" ng-if="(currentComponent != null) && (currentComponent.type == 'externallinks')">
+
+                <section class="c-externallinks-edit" avalonctrl="externallinks1xh">
+
+                    <div class="c-conf-row" style="display: none;">
+                        <div class="c-conf-row">
+                            <label class="c-input-label">网址链接</label>
+                        </div>
+                        <div class="c-conf-row">
+                            <input class="address" placeholder="请输入链接地址，如http://www.liveapp.cn">
+                        </div>
+                    </div>
+
+                    <div class="c-conf-row" style="display: block;">
+                        <div class="c-conf-row">
+                            <label class="c-input-label">电话号码</label>
+                        </div>
+                        <div class="c-conf-row">
+                            <input class="phone" type="text" placeholder="请输入电话号码，如4000-168-906">
+                        </div>
+                    </div>
+
+                    <div class="c-externallinks-pop" style="display: none;">
+                        <div class="c-externallinks-layer">
+                            <div class="c-conf-row">
+                                <div class="u-image-wrap">
+                                    <img src="/static/images/layer-default.png">
+                                </div>
+                            </div>
+                            <ul class="u-layer-change-btn-wrap">
+                                <li class="change-btn-image">更换</li>
+                                <li class="change-btn-pre">预览</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="c-conf-row redirectList" style="display: none;">
+                        <div class="c-conf-row">
+                            <label class="c-input-label">跳转至</label>
+                        </div>
+                        <div class="c-dropdown-row">
+                            <select>
+                                <option value="0" label="第 1 页">第 1 页</option>
+                                <option value="1" label="第 2 页">第 2 页</option>
+                                <option value="2" label="第 3 页">第 3 页</option>
+                                <option value="3" label="第 4 页">第 4 页</option>
+                                <option value="4" label="第 5 页">第 5 页</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="c-externallinks-switch">
+                        <div class="c-conf-row">
+                            <div class="c-switch-box">
+                                <ul class="u-tab">
+                                    <li>
+                                        <a href="javascript:void(0);" class="z-active">文字按钮</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">图标按钮</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-externallinks-setting">
+                        <div class="c-input-row" style="display: block;">
+                            <div class="c-input-wrap">
+                                <input type="text" class="btnTxt">
+                            </div>
+                            <div class="c-font-setting">
+                                <ul>
+                                    <li class="dropdown font-size">
+                                        <a class="small"><div class="icon-x16 x-icon-font-size"></div></a>
+                                    </li>
+                                    <li class="font-color">
+                                        <input avalonctrl="colorpicker0297852552659216844201394812316981" data-duplex-changed="initCp" class="dropdown font-color" style="color: rgb(255, 255, 255); background: rgb(255, 255, 255);">
+                                        <div class="font-color-layer" style="background-color: rgb(255, 255, 255);"></div>
+                                        <a class="small"><div class="icon-x16 x-icon-font-color"></div></a>
+                                    </li>
+                                    <li class="dropdown text-align">
+                                        <a class="small"><div class="icon-x16 x-icon-text-align x-icon-center"></div></a>
+                                    </li>
+                                    <li class="dropdown font-style">
+                                        <a class="small"><div class="icon-x16 x-icon-font-style"></div></a>
+                                    </li>
+                                </ul>
+                                <ul class="dropdown-list" type="font-size-list" style="display: none;">
+                                    
+                                    <li value="0">18</li>
+                                    <li value="0">20</li>
+                                    <li value="0">22</li>
+                                    <li value="0">24</li>
+                                    <li value="0" class="selected">26</li>
+                                    <li value="0">28</li>
+                                    <li value="0">30</li>
+                                    <li value="0">32</li>
+                                    <li value="0">34</li>
+                                    <li value="0">36</li>
+                                    <li value="0">38</li>
+                                    <li value="0">40</li>
+                                    <li value="0">42</li>
+                                    <li value="0">44</li>
+                                    <li value="0">46</li>
+                                    <li value="0">48</li>
+                                    <li value="0">50</li>
+                                    <li value="0">52</li>
+                                    <li value="0">54</li>
+                                    <li value="0">56</li>
+                                    <li value="0">58</li>
+                                    <li value="0">60</li>
+                                    <li value="0">62</li>
+                                    <li value="0">64</li>
+                                    <li value="0">72</li>
+                                    <li value="0">96</li>
+                                    <li value="0">100</li>
+                                    <li value="0">200</li>
+                                    <li value="0">300</li>
+                                    <li value="0">400</li>
+                                    <li value="0">500</li>
+                                </ul>
+                                <ul class="dropdown-list" type="text-align-list" style="display: none;">
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-left"></div></a>
+                                    </li>
+                                    <li class="selected">
+                                        <a class="small"><div class="icon-x16 x-icon-center"></div></a>
+                                    </li>
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-right"></div></a>
+                                    </li>
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-justify"></div></a>
+                                    </li>
+                                </ul>
+                                <ul class="dropdown-list" type="font-style-list" style="display: none;">
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-b"></div></a>
+                                    </li>
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-i"></div></a>
+                                    </li>
+                                    <li>
+                                        <a class="small"><div class="icon-x16 x-icon-u"></div></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="u-image-row" style="display: none;">
+                            <div class="u-image-wrap">
+                                <div class="u-image-small">
+                                    <div class="u-image-icon" style="background-image: url(&quot;/static/images/phone.png&quot;);"></div>
+                                </div>
+                            </div>
+                            <div class="u-image-change-btn">更换图标</div>
+                        </div>
+                    </div>
+
+                    <div id="externallinksHTMLRender" class="f-hide">
+                        <div class="c-externallinks content" ms-css-webkit-animation="{{comInsList[0].animeShowClass}}" ms-css-animation="{{comInsList[0].animeShowClass}}" inside-styles="" src="/static/images/layer-default.png" background-type="1" background-layout="center" style="border-color: rgb(19, 167, 43); border-radius: 50rem; transform: rotate(0deg); opacity: 1; border-width: 0px; background-image: none; background-color: rgba(22, 186, 48, 0.901961);">
+                            <a class="f-fix link" href="javascript:;" address="" phone="">
+                                <div class="btn-txt" style="color: rgb(255, 255, 255); font-size: 1.625em;">
+                                    <div class="btn-info" style="text-align: center;">
+                                        拨打电话
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="c-conf-panel"></div>
+            </section>
+            <!-- 组件外观 -->
+            <section class="c-conf-section c-conf-tabSection" ng-if="(currentComponent != null)">
+                <ul class="u-tab z-singleLine">
+                    <li><a href="javascript:void(0);" style="border-left:none;" class="z-active">样式</a></li>
+                    <li><a href="javascript:void(0);" class="">动画</a></li>
+                </ul>
+            </section>
+
+            <section class="c-conf-section c-conf-style z-expand" ng-if="(currentComponent != null)">
+                <div class="c-conf-panel">
+                    <div class="c-conf-row">
+                        <label class="c-input-label">背景</label>
+                        <div class="c-input-box">
+
+                            <div class="u-colorpicker">
+                                <input type="text" id="backgroundColor" style="color: rgb(0, 0, 0); background: rgb(225, 225, 225);">
+                                <a href="javascript:void(0);" class="small">
+                                    <i class="icon-x20 icon-x20-color"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-conf-panel">
+                    <div class="c-conf-row">
+                        <label class="c-input-label" for="borderWidth">边框</label>
+                        <div class="c-input-box">
+                            <div class="u-spinner">
+                                <input id="borderWidth" type="text" value="" ng-model="currentComponent.borderWidth"/>
+                            </div>
+                            <div class="u-colorpicker f-ml-6">
+                                <input type="text" id="borderColor" avalonctrl="$coms_borderColor_colorpicker" data-duplex-changed="initCp" style="color: rgb(0, 0, 0); background: rgb(204, 204, 204);">
+
+                                    <a href="javascript:void(0);" class="small">
+                                    <i class="icon-x20 icon-x20-color"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-conf-panel">
+                    <div class="c-conf-row">
+                        <label class="c-input-label" for="borderRadius">圆角</label>
+                        <div class="c-input-box">
+                            <div class="u-slider f-mr-14">
+                                <div style="top:-24px; position:relative"><input id="borderRadiusSlider" type="hidden" value="0;50" /></div>
+                            </div>
+                            <input type="text" id="borderRadius" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.borderRadius">
+                        </div>
+                    </div>
+                </div>
+                <div class="c-conf-panel">
+                    <div class="c-conf-row">
+                        <label class="c-input-label" for="opacity">透明</label>
+                        <div class="c-input-box">
+                            <div class="u-slider f-mr-14">
+                                <div style="top:-24px; position:relative"><input id="opacitySlider" type="hidden" value="0;100" /></div>
+                            </div>
+                            <input type="text" id="opacity" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.opacity">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 组件旋转 -->
+                <div class="c-conf-panel">
+                    <div class="c-conf-row c-conf-row-2">
+                        <label class="c-input-label" for="rotate">旋转</label>
+                        <div class="c-input-box">
+                            <div class="u-slider f-mr-14">
+                                <div style="top:-24px; position:relative"><input id="rotateSlider" type="hidden" value="0;360" /></div>
+                            </div>
+                            <input type="text" id="rotate" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.rotate">
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+
+            <!-- 配置节 end -->
+            <section class="c-conf-section z-expand" ng-if="(currentComponent == null)">
+
+                <!-- 翻页节 -->
+                <div class="f-fix slide-page">
+                    <label class="f-float-l f-mt-2" style="color:#333;line-height: 24px">翻页图标</label>
+                    <select ng-model="currentPage.turnPage.id" ng-options="m.id as m.name for m in turnPageOptions" class="u-select c-span-7 slide-page-select"></select>
+                    <span class="slide-page-line"></span>
+                </div>
+
+                <hr>
+
+                <h2>翻页动画</h2>
+                <div ng-if="(currentPage != null)" config-page-animations-directive></div>
+
+                <!-- 应用到所有页面 -->
+                <div class="c-conf-row f-mt-30">
+                    <div class="f-fix f-mb-20">
+                        <label class="f-float-l f-mt-2" style="color:#333">应用到所有页面</label>
+                        <div style="float:right;"><input id="apply_all_page" type="checkbox" class="js-switch" /></div>
+                    </div>
+                    <hr>
+                    <div class="f-fix f-mt-20" style="position: relative">
+                        <label class="f-float-l f-mt-2" style="color:#333">锁定翻页</label>
+                        <div style="float:right;"><input id="lock_page" type="checkbox" class="js-switch" /></div>
+
+                        <div class="tips-area">
+                            <div class="info">
+                                <div class="info-pop" style="top: -61px;height: 38px;padding-top: 10px;width: 205px">
+                                    锁定后该页将无法继续翻页，
+                                    <br>
+                                    可添加“跳转按钮”跳转至其他页面。
+                                    <i></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="f-fix f-mt-20 f-mb-15" style="position: relative">
+                        <label class="f-float-l f-mt-2" style="color:#333">自动翻页</label>
+                        <div style="float:right;"><input id="auto_turn_page" type="checkbox" class="js-switch" /></div>
+
+                        <div class="tips-area">
+                            <div class="info">
+                                <div class="info-pop" style="top: -80px;height: 57px;padding-top: 10px">
+                                    1、该页面动画自动播放完毕后，并自动翻至下一页；
+                                    <br>
+                                    2、自动播放时，点击该页面即可停止自动播放。
+                                    <i></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- 位置 大小 开始 -->
+            <section class="c-conf-section c-conf-common" ng-if="(currentComponent != null)">
+                <div class="c-conf-row c-conf-row-3">
+                    <label class="c-input-label" for="left">位置</label>
+                    <div class="c-input-box">
+                        <label class="u-label f-mr-9">X轴</label>
+                        <input type="text" id="left" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.left" />
+                        <label class="u-label f-mr-9" for="top">Y轴</label>
+                        <input type="text" id="top" class="u-textbox" size="10" ng-model="currentComponent.top" />
+                    </div>
+                </div>
+                <div class="c-conf-row">
+                    <label class="c-input-label" for="width">大小</label>
+                    <div class="c-input-box">
+                        <label class="u-label f-mr-9">宽</label>
+                        <input type="text" id="width" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.width" />
+                        <label class="u-label f-mr-9">高</label>
+                        <input type="text" id="height" class="u-textbox" size="10" ng-model="currentComponent.height" />
+                    </div>
+                </div>
+            </section>
+            <!-- 位置 大小 结束 -->
+        </section>
+
+        <section class="effect f-fix z-hide">
+            <header>页面特效</header>
+            <div class="choose-list">
+                <!--repeat041602396735093146191331081492284-->
+                <div class="choose-warp" title="擦一擦">
+                    <div class="effect-item" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/pages/effect/eraser/img/earser-bg1.jpg&quot;);">
+                        <div class="icon-x20 icon-x20-effect-check" style="display: none;"></div>
+                    </div>
+                    <p>擦一擦</p>
+                </div>
+                <!--repeat041602396735093146191331081492284-->
+                <div class="choose-warp" title="氛围特效">
+                    <div class="effect-item dropout" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/pages/effect/dropout/img/dropout-bg1.jpg&quot;);">
+                        <div class="icon-x20 icon-x20-effect-check" style="display: none;"></div>
+                    </div>
+                    <p>氛围特效</p>
+                </div>
+                <!--repeat041602396735093146191331081492284-->
+                <div class="choose-warp" title="指纹特效">
+                    <div class="effect-item" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/pages/effect/finger/img/finger-bg1.png&quot;);">
+                        <div class="icon-x20 icon-x20-effect-check" style="display: none;"></div>
+                    </div>
+                    <p>指纹特效</p>
+                </div>
+                <!--repeat041602396735093146191331081492284-->
+                <div class="choose-warp" title="重力特效">
+                    <div class="effect-item" style="background-image: url(&quot;http://staticeng.liveapp.cn/tpl/pages/effect/gravity/img/gravity-bg1.jpg&quot;);">
+                        <div class="icon-x20 icon-x20-effect-check" style="display: none;"></div>
+                    </div>
+                    <p>重力特效</p>
+                </div>
+                <!--repeat041602396735093146191331081492284:end--> </div>
+        </section>
+
+        <section class="effect-conf z-hide" style="display: none;">
+            <header>
+                <div class="icon-x20 icon-x20-effecticon" style="display:inline-block;"></div>
+                <span>特效</span>
+            </header>
+            <div class="effect-item">
+                <div class="effect-show-warp"></div>
+            </div>
+        </section>
+    </section>
+    <!--ms-include-end-->
+</div>

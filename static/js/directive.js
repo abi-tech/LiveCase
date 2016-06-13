@@ -14,27 +14,8 @@ mainModule.directive('configDirective', function () {
         link : function (scope, element, attrs) {
             scope.$watch('currentComponent', function(newValue, oldValue) { console.log(scope.currentPage);
                 if(scope.currentComponent == null){ 
-                    $("#apply_all_page").prop("checked", scope.currentPage.applyAllPages);
-                    $("#auto_turn_page").prop("checked", scope.currentPage.autoTurnPage);
-                    $("#lock_page").prop("checked", scope.currentPage.lockTurnPage);
-                    var switchery1 = new Switchery($("#apply_all_page")[0], { size: 'small' });
-                    var switchery2 = new Switchery($("#auto_turn_page")[0], { size: 'small' });
-                    var switchery3 = new Switchery($("#lock_page")[0], { size: 'small' });
-
-                    $("#apply_all_page").on('change', function(){
-                        scope.currentPage.applyAllPages = this.checked;
-                        scope.$apply();
-                    });
-
-                    $("#auto_turn_page").on('change', function(){
-                        scope.currentPage.autoTurnPage = this.checked;
-                        scope.$apply();
-                    });
-
-                    $("#lock_page").on('change', function(){
-                        scope.currentPage.lockTurnPage = this.checked;
-                        scope.$apply();
-                    });
+                    
+                    
 
                     $("#page_backgroundColor").spectrum({
                         preferredFormat: "hex",

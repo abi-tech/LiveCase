@@ -80,23 +80,68 @@ mainModule.directive('configPageBackgroundDirective', function () {
 //页面配置 配置 配置节
 var tpl_config_page_section = [
 	'<section class="c-conf-section z-expand">',
+        '<div class="f-fix slide-page">',
+            '<label class="f-float-l f-mt-2" style="color:#333;line-height: 24px">翻页图标</label>',
+            '<select ng-model="currentPage.turnPage.id" ng-options="m.id as m.name for m in turnPageOptions" class="u-select c-span-7 slide-page-select"></select>',
+            '<span class="slide-page-line"></span>',
+        '</div>',
+        '<hr><h2>翻页动画</h2>',
+        '<div class="c-conf-panel f-mb-10 f-mt-20">',
+            '<ul class="u-chooseList-large">',
+                '{{ each list as animation i}}',
+                '<li>',
+                    '<a style="background-color:#f8f8f8" href="javascript:void(0);" class="u-image-wrap f-p-0 f-wh-80" data-effect="{{ animation.effect }}">',
+                        '<div class="u-image-large f-wh-80 anime-page-{{ animation.effect }}"></div>',
+                    '</a>',
+                    '<p>{{ animation.name }}</p>',
+                '</li>', 
+                '{{ /each }}',
+            '</ul>',
+        '</div>',
+        '<div class="c-conf-row f-mt-30">',
+            '<div class="f-fix f-mb-20">',
+                '<label class="f-float-l f-mt-2" style="color:#333">应用到所有页面</label>',
+                '<div style="float:right;"><input id="apply_all_page" type="checkbox" class="js-switch" /></div>',
+            '</div>',
+            '<hr>',
+            '<div class="f-fix f-mt-20" style="position: relative">',
+                '<label class="f-float-l f-mt-2" style="color:#333">锁定翻页</label>',
+                '<div style="float:right;"><input id="lock_page" type="checkbox" class="js-switch" /></div>',
+                '<div class="tips-area">',
+                    '<div class="info">',
+                        '<div class="info-pop" style="top: -61px;height: 38px;padding-top: 10px;width: 205px">',
+                            '锁定后该页将无法继续翻页，',
+                            '<br>',
+                            '可添加“跳转按钮”跳转至其他页面。',
+                            '<i></i>',
+                        '</div>',
+                    '</div>',
+                '</div>',
+            '</div>',
+            '<hr>',
+            '<div class="f-fix f-mt-20 f-mb-15" style="position: relative">',
+                '<label class="f-float-l f-mt-2" style="color:#333">自动翻页</label>',
+                '<div style="float:right;"><input id="auto_turn_page" type="checkbox" class="js-switch" /></div>',
+                '<div class="tips-area">',
+                    '<div class="info">',
+                        '<div class="info-pop" style="top: -80px;height: 57px;padding-top: 10px">',
+                            '1、该页面动画自动播放完毕后，并自动翻至下一页；',
+                            '<br>',
+                            '2、自动播放时，点击该页面即可停止自动播放。',
+                            '<i></i>',
+                        '</div>',
+                    '</div>',
+                '</div>',
+            '</div>',
+        '</div>',
 	'</section>'
 ].join('');
 
-var tpl_config_page_animation = [
-    '<div class="c-conf-panel f-mb-10 f-mt-20">',
-        '<ul class="u-chooseList-large">',
-            '{{ each list as animation i}}',
-			'<li>',
-			    '<a style="background-color:#f8f8f8" href="javascript:void(0);" class="u-image-wrap f-p-0 f-wh-80" data-effect="{{ animation.effect }}">',
-			        '<div class="u-image-large f-wh-80 anime-page-{{ animation.effect }}"></div>',
-			    '</a>',
-			    '<p>{{ animation.name }}</p>',
-			'</li>', 
-            '{{ /each }}',
-        '</ul>',
-    '</div>'
-].join('');
+var data_page_turn_icons = [
+    { "id": "1", "name": "LiveApp", "url": "static/images/upArrow.png" },
+    { "id": "2", "name": "UpArrow", "url": "static/images/slideUp.png" },
+    { "id": "3", "name": "DownArrow", "url": "static/images/slideDown.png" }
+];
 
 var data_page_animations = [
     { "name": "缩放", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
@@ -106,18 +151,70 @@ var data_page_animations = [
     { "name": "横向滑动", "effect": "xSlideIn", "duration": 1, "delay": 0 }
 ];
 
-mainModule.directive("configPageAnimationsDirective", ['$rootScope', function ($rootScope) {
+mainModule.directive("configPageTurnPageIconDirective", ['$rootScope', function ($rootScope) {
     return {
         restrict: "A",
-        template: template.compile(tpl_config_page_animation)({ list: data_page_animations }),
+        template: tpl_config_page_turn_page_icon,
         replace: true,
         link: function (scope, element, attrs) {
-            $("ul>li>a", element).on("click", function(){
-                //scope.$emit("animation.active", scope.animation);
+            scope.turnPageOptions = data_page_turn_icons;
+        }
+    }
+}]);
+
+mainModule.directive("configPageSectionDirective", ['$rootScope', function ($rootScope) {
+    return {
+        restrict: "A",
+        template: template.compile(tpl_config_page_section)({ list: data_page_animations }),
+        replace: true,
+        link: function (scope, element, attrs) {
+            var switchery1, switchery2, switchery3;
+            var init = function(){
+
+            }
+
+            scope.$watch('currentPage', function(newValue, oldValue) { console.log('configPageSectionDirective', newValue, oldValue);
+                if(newValue == null) return;
+
+                if(switchery1) switchery1.destroy();
+                if(switchery2) switchery2.destroy();
+                if(switchery3) switchery3.destroy();
+                scope.turnPageOptions = data_page_turn_icons;
                 $("ul>li>a", element).removeClass("z-active");
-                $(this).addClass("z-active");
-                console.log($(this).data("effect"));
+                $("a[data-effect='" + newValue.animation.effect + "']").addClass("z-active");
+
+                $("ul>li>a", element).on("click", function(){
+                    //scope.$emit("animation.active", scope.animation);
+                    $("ul>li>a", element).removeClass("z-active");
+                    $(this).addClass("z-active");
+                    console.log($(this).data("effect"));
+                    $rootScope.currentPage.animation.effect = $(this).data("effect");
+                });
+
+                $("#apply_all_page").prop("checked", $rootScope.currentPage.applyAllPages);
+                $("#auto_turn_page").prop("checked", $rootScope.currentPage.autoTurnPage);
+                $("#lock_page").prop("checked", $rootScope.currentPage.lockTurnPage);
+
+                switchery1 = new Switchery($("#apply_all_page")[0], { size: 'small' });
+                switchery2 = new Switchery($("#auto_turn_page")[0], { size: 'small' });
+                switchery3 = new Switchery($("#lock_page")[0], { size: 'small' });
+
+                $("#apply_all_page").on('change', function(){ switchery1.destroy()
+                    $rootScope.currentPage.applyAllPages = this.checked;
+                    $rootScope.$apply();
+                });
+
+                $("#auto_turn_page").on('change', function(){
+                    $rootScope.currentPage.autoTurnPage = this.checked;
+                    $rootScope.$apply();
+                });
+
+                $("#lock_page").on('change', function(){
+                    $rootScope.currentPage.lockTurnPage = this.checked;
+                    $rootScope.$apply();
+                });
             });
         }
     }
 }]);
+

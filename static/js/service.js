@@ -76,6 +76,10 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                     style: { "background-color": "#ffffff", "background-image": "none"},
                     animation: { "name": "缩放", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
                     turnPage: { "id": "1", "name": "LiveApp", "url": "static/images/upArrow.png" },
+                    applyAllPages: false,
+                    autoTurnPage: false,
+                    autoTurnPageDelay: 0,
+                    lockTurnPage: false,
                     components: []
                 }
             }

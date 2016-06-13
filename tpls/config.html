@@ -9,7 +9,7 @@
 
             <div ng-if="(currentPage != null)" config-page-header-directive></div>
             <div ng-if="(currentPage != null)" config-page-background-directive></div>
-            
+            <div ng-if="(currentPage != null)" config-page-section-directive></div>
 
             <!-- 图片 -->
             <div ng-if="(currentComponent != null) && (currentComponent.type == 'singleimage')" section-cropper-directive></div>
@@ -399,64 +399,6 @@
                     </div>
                 </div>
                 
-            </section>
-
-            <!-- 配置节 end -->
-            <section class="c-conf-section z-expand" ng-if="(currentComponent == null)">
-
-                <!-- 翻页节 -->
-                <div class="f-fix slide-page">
-                    <label class="f-float-l f-mt-2" style="color:#333;line-height: 24px">翻页图标</label>
-                    <select ng-model="currentPage.turnPage.id" ng-options="m.id as m.name for m in turnPageOptions" class="u-select c-span-7 slide-page-select"></select>
-                    <span class="slide-page-line"></span>
-                </div>
-
-                <hr>
-
-                <h2>翻页动画</h2>
-                <div ng-if="(currentPage != null)" config-page-animations-directive></div>
-
-                <!-- 应用到所有页面 -->
-                <div class="c-conf-row f-mt-30">
-                    <div class="f-fix f-mb-20">
-                        <label class="f-float-l f-mt-2" style="color:#333">应用到所有页面</label>
-                        <div style="float:right;"><input id="apply_all_page" type="checkbox" class="js-switch" /></div>
-                    </div>
-                    <hr>
-                    <div class="f-fix f-mt-20" style="position: relative">
-                        <label class="f-float-l f-mt-2" style="color:#333">锁定翻页</label>
-                        <div style="float:right;"><input id="lock_page" type="checkbox" class="js-switch" /></div>
-
-                        <div class="tips-area">
-                            <div class="info">
-                                <div class="info-pop" style="top: -61px;height: 38px;padding-top: 10px;width: 205px">
-                                    锁定后该页将无法继续翻页，
-                                    <br>
-                                    可添加“跳转按钮”跳转至其他页面。
-                                    <i></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr>
-                    <div class="f-fix f-mt-20 f-mb-15" style="position: relative">
-                        <label class="f-float-l f-mt-2" style="color:#333">自动翻页</label>
-                        <div style="float:right;"><input id="auto_turn_page" type="checkbox" class="js-switch" /></div>
-
-                        <div class="tips-area">
-                            <div class="info">
-                                <div class="info-pop" style="top: -80px;height: 57px;padding-top: 10px">
-                                    1、该页面动画自动播放完毕后，并自动翻至下一页；
-                                    <br>
-                                    2、自动播放时，点击该页面即可停止自动播放。
-                                    <i></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </section>
 
             <!-- 位置 大小 开始 -->

@@ -35,53 +35,7 @@ mainModule.directive('configDirective', function () {
                     });
 
                 }else{
-                    var borderRadius = scope.currentComponent.borderRadius || 0;
-                    var opacity = scope.currentComponent.opacity || 0;
-                    var rotate = scope.currentComponent.rotate || 0;
-                    $("#borderRadiusSlider", element).ionRangeSlider({
-                        type: "single",
-                        min: 0,
-                        max: 50,
-                        from: borderRadius,
-                        hide_min_max: true,
-                        hide_from_to: true,
-                        grid: false,
-                        onChange: function (data) { 
-                            //$("#borderRadius", element).val(data.from);
-                            scope.currentComponent.borderRadius = data.from;
-                            scope.$apply();
-                        }
-                    });
-
-                    $("#opacitySlider", element).ionRangeSlider({
-                        type: "single",
-                        min: 0,
-                        max: 100,
-                        from: opacity,
-                        hide_min_max: true,
-                        hide_from_to: true,
-                        grid: false,
-                        onChange: function (data) {
-                            //$("#borderRadius", element).val(data.from);
-                            scope.currentComponent.opacity = data.from;
-                            scope.$apply();
-                        }
-                    });
-
-                    $("#rotateSlider", element).ionRangeSlider({
-                        type: "single",
-                        min: 0,
-                        max: 360,
-                        from: rotate,
-                        hide_min_max: true,
-                        hide_from_to: true,
-                        grid: false,
-                        onChange: function (data) {
-                            //$("#borderRadius", element).val(data.from);
-                            scope.currentComponent.rotate = data.from;
-                            scope.$apply();
-                        }
-                    });
+                    
 
                 }
                 
@@ -181,7 +135,6 @@ mainModule.directive("componentDirective", ['$rootScope', 'pageService', functio
         restrict: "AE",
         template: tpl_component_container,
         replace: true,
-        transclude: true,
         link: function (scope, element, attrs) {
             element.css("top", scope.component.top);
             element.css("left", scope.component.left);

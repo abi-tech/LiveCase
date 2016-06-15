@@ -1913,7 +1913,23 @@ Switchery.prototype.isDisabled = function() {
 
 Switchery.prototype.destroy = function() {
   this.events.unbind();
+  
+  removeClass(this.element, "js-switch");
+  this.element.removeAttribute("data-switchery");
+  this.element.style.display = '';
+  this.switcher.parentNode.removeChild(this.switcher);
 };
+
+function hasClass(obj, cls) {  
+    return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));  
+} 
+
+function removeClass(obj, cls) {  
+    if (hasClass(obj, cls)) {  
+        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');  
+        obj.className = obj.className.replace(reg, '');  
+    }  
+} 
 
 /**
  * Enable disabled switch element.

@@ -1,0 +1,423 @@
+<section class="c-conf-section c-conf-tabSection" ng-if="(currentComponent != null)">
+    <ul class="u-tab z-singleLine">
+        <li>
+            <a href="javascript:void(0);" style="border-left:none;" class="z-active">样式</a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="">动画</a>
+        </li>
+    </ul>
+</section>
+
+<section class="c-conf-section c-conf-style z-expand" ng-if="(currentComponent != null)">
+    <div class="c-conf-panel">
+        <div class="c-conf-row">
+            <label class="c-input-label">背景</label>
+            <div class="c-input-box">
+
+                <div class="u-colorpicker">
+                    <input type="text" id="backgroundColor" style="color: rgb(0, 0, 0); background: rgb(225, 225, 225);">
+                    <a href="javascript:void(0);" class="small"> <i class="icon-x20 icon-x20-color"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-conf-panel">
+        <div class="c-conf-row">
+            <label class="c-input-label" for="borderWidth">边框</label>
+            <div class="c-input-box">
+                <div class="u-spinner">
+                    <input id="borderWidth" type="text" value="" ng-model="currentComponent.borderWidth"/>
+                </div>
+                <div class="u-colorpicker f-ml-6">
+                    <input type="text" id="borderColor" avalonctrl="$coms_borderColor_colorpicker" data-duplex-changed="initCp" style="color: rgb(0, 0, 0); background: rgb(204, 204, 204);">
+
+                    <a href="javascript:void(0);" class="small"> <i class="icon-x20 icon-x20-color"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-conf-panel">
+        <div class="c-conf-row">
+            <label class="c-input-label" for="borderRadius">圆角</label>
+            <div class="c-input-box">
+                <div class="u-slider f-mr-14">
+                    <div style="top:-24px; position:relative">
+                        <input id="borderRadiusSlider" type="hidden" value="0;50" />
+                    </div>
+                </div>
+                <input type="text" id="borderRadius" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.borderRadius"></div>
+        </div>
+    </div>
+    <div class="c-conf-panel">
+        <div class="c-conf-row">
+            <label class="c-input-label" for="opacity">透明</label>
+            <div class="c-input-box">
+                <div class="u-slider f-mr-14">
+                    <div style="top:-24px; position:relative">
+                        <input id="opacitySlider" type="hidden" value="0;100" />
+                    </div>
+                </div>
+                <input type="text" id="opacity" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.opacity"></div>
+        </div>
+    </div>
+
+    <!-- 组件旋转 -->
+    <div class="c-conf-panel">
+        <div class="c-conf-row c-conf-row-2">
+            <label class="c-input-label" for="rotate">旋转</label>
+            <div class="c-input-box">
+                <div class="u-slider f-mr-14">
+                    <div style="top:-24px; position:relative">
+                        <input id="rotateSlider" type="hidden" value="0;360" />
+                    </div>
+                </div>
+                <input type="text" id="rotate" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.rotate"></div>
+        </div>
+    </div>
+
+</section>
+
+<section class="c-conf-section c-conf-animeSection">
+    <!-- 入场动画/出场动画选项卡 -->
+    <div class="c-conf-row">
+        <ul class="u-tab z-singleLine f-mb-10">
+            <li>
+                <a href="javascript:void(0);" class="z-active">入场动画</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="">出场动画</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 入场动画面板 -->
+    <div class="c-conf-panel" style="display: block;">
+        <!-- 选择动画 -->
+        <div class="c-conf-row c-conf-row-2">
+            <a href="javascript:void(0);" class="link-chooseAnime">
+                <div class="u-image-wrap">
+                    <div class="u-image-large undefined"></div>
+                </div>
+            </a>
+            <div class="c-input-box c-conf-col-22 f-pb-4">
+                <!--没有动画-->
+                <div class="f-mt-4" style="display: block;">
+                    <label class="u-label f-float-l f-mt-4">没有入场动画</label>
+
+                    <a href="javascript:void(0);" class="u-btn u-btn-large">添加动画</a>
+                </div>
+                <!--有动画-->
+                <div class="f-mt-8" style="display: none;">
+                    <label class="u-label f-float-l"></label>
+
+                    <a href="javascript:void(0);" class="icon-toggle f-mr-7 toggleAnime"></a>
+                    <a href="javascript:void(0);" class="icon-play f-mr-7"></a>
+                    <a href="javascript:void(0);" class="icon-x24 icon-x24-remove"></a>
+                </div>
+
+                <!--选择动画-->
+                <div class="u-dialog" style="display: none;">
+                    <header class="u-dialog-head">选择动画</header>
+                    <section class="u-dialog-body">
+                        <ul class="u-chooseList">
+                            <!--repeat92409104520440645128018756886068--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-bounceIn"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>弹入</p>
+                            </li><!--repeat92409104520440645128018756886068--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-fadeIn"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>淡入</p>
+                            </li><!--repeat92409104520440645128018756886068--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-flipIn"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>翻入</p>
+                            </li><!--repeat92409104520440645128018756886068--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-rotateIn"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>旋入</p>
+                            </li><!--repeat92409104520440645128018756886068--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-zoomIn"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>渐进放大</p>
+                            </li><!--repeat92409104520440645128018756886068:end-->
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!--动画设置项-->
+        <div class="c-conf-panel f-mt-4" style="display: none;">
+            <hr class="u-hr u-hr-2">
+            <!-- 子动画 -->
+            <div class="c-conf-row c-conf-row-3">
+                <ul class="u-chooseList-small">
+                    <li>
+                        <a href="javascript:void(0);" class="u-image-wrap u-image">
+                            <div class="u-image-small anime-in" style="animation: none;"></div>
+                            <i class="icon-x22 icon-x22-tick-circle"></i>
+                        </a>
+                        <p>水平翻入</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 开始时间 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">开始时间</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <input id="animDelaySlider" type="hidden" value="0;300" />
+                    </div>
+                    <div class="u-input-group">
+                        <input id="animDelay" type="text" class="u-textbox u-textbox-time" size="4">
+                        <span class="u-units">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 持续时间 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">持续时间</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <input id="animDurationSlider" type="hidden" value="0;5" />
+                    </div>
+                    <div class="u-input-group">
+                        <input id="animDuration" type="text" class="u-textbox u-textbox-time" size="4">
+                        <span class="u-units">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 循环次数 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">执行次数</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <input id="animExecCountSlider" type="hidden" value="1;10" />
+                    </div>
+                    <div class="u-input-group">
+                        <input id="animExecCount" type="text" class="u-textbox u-textbox-time" size="4">
+                        <span class="u-units">&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 无限循环 -->
+            <div class="c-conf-row c-conf-row-2">
+                <div class="c-input-box c-input-box-l">
+                    <label class="u-label">
+                        无限循环
+                        <input type="checkbox" class="u-checkbox">
+                        <i class="icon-checkbox"></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="c-conf-row">
+                <div class="f-fix f-mt-15" style="position: relative">
+                    <label class="f-float-l f-mt-2" style="color:#333;font-size:12px;">
+                        动画说明
+                    </label>
+                    <div class="f-float-r flag">
+
+                    </div>
+
+                    <div class="tips-area" style="left:50px">
+                        <div class="info">
+                            <div class="info-pop" style="left:-50px;top:-132px;height: 105px;padding:10px">
+                                1、【开始时间】进入本页后，组件动画开始播放的时间；<br>
+                                2、【持续时间】指动画播放持续的时间，时间越长，动作越慢；<br>
+                                3、【执行次数】是指动画循环播放的次数；<br>
+                                4、【无限循环】是指动画播放次数为无限循环。
+                                <i style="left:53px"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 出场动画面板 -->
+    <div class="c-conf-panel" style="display: none;">
+        <!-- 选择动画 -->
+        <div class="c-conf-row c-conf-row-2">
+            <a href="javascript:void(0);" class="link-chooseAnime">
+                <div class="u-image-wrap">
+                    <div class="u-image-large undefined"></div>
+                </div>
+            </a>
+            <div class="c-input-box c-conf-col-22 f-pb-4">
+                <!--没有动画-->
+                <div class="f-mt-4" style="display: block;">
+                    <label class="u-label f-float-l f-mt-4">没有出场动画</label>
+
+                    <a href="javascript:void(0);" class="u-btn u-btn-large">添加动画</a>
+                </div>
+                <!--有动画-->
+                <div class="f-mt-8" style="display: none;">
+                    <label class="u-label f-float-l"></label>
+
+                    <a href="javascript:void(0);" class="icon-toggle f-mr-7 toggleAnime"></a>
+                    <a href="javascript:void(0);" class="icon-play f-mr-7"></a>
+                    <a href="javascript:void(0);" class="icon-x24 icon-x24-remove"></a>
+                </div>
+
+                <!--选择动画-->
+                <div class="u-dialog" style="display: none;">
+                    <header class="u-dialog-head">选择动画</header>
+                    <section class="u-dialog-body">
+                        <ul class="u-chooseList">
+                            <!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-bounceOut"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>弹出</p>
+                            </li><!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-fadeOut"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>淡出</p>
+                            </li><!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-flipOut"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>翻出</p>
+                            </li><!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-rotateOut"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>旋出</p>
+                            </li><!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-zoomOut"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>渐进缩小</p>
+                            </li><!--repeat481069232969264967212532313525064--><li>
+                                <a href="javascript:void(0);" class="u-image-wrap f-p-4">
+                                    <div class="u-image-large anime-hinge"></div>
+                                    <i class="icon-x22 icon-x22-tick-circle"></i>
+                                </a>
+                                <p>坠落</p>
+                            </li><!--repeat481069232969264967212532313525064:end-->
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!--动画设置项-->
+        <div class="c-conf-panel f-mt-4" style="display: none;">
+            <hr class="u-hr u-hr-2">
+            <!-- 方向 -->
+            <div class="c-conf-row c-conf-row-3">
+                <ul class="u-chooseList-small">
+                    <!--repeat18593595730728548286752753806792:end-->
+                </ul>
+            </div>
+
+            <!-- 开始时间 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">开始时间</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <div data-slider-min="0" data-slider-max="300000" class="oni-helper-hidden-accessible" avalonctrl="$coms_outAnime_delay_slider" style="display: none; height: 0px; width: 0px; padding: 0px;"></div><div class="oni-slider oni-widget oni-corner-all oni-slider-horizontal"><!--ms-if--><b class="oni-slider-handle oni-corner-all" data-draggable-start="dragstart" data-draggable-stop="dragend" data-draggable-drag="drag" data-draggable-containment="parent" data-axis="x" style="left: 0%;"></b><!--ms-if--><!--ms-if--></div>
+                    </div>
+                    <div class="u-input-group">
+                        <input type="text" class="u-textbox u-textbox-time" size="4">
+                        <span class="u-units">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 持续时间 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">持续时间</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <div data-slider-min="0" data-slider-max="5000" class="oni-helper-hidden-accessible" avalonctrl="$coms_outAnime_duration_slider" style="display: none; height: 0px; width: 0px; padding: 0px;"></div><div class="oni-slider oni-widget oni-corner-all oni-slider-horizontal"><!--ms-if--><b class="oni-slider-handle oni-corner-all" data-draggable-start="dragstart" data-draggable-stop="dragend" data-draggable-drag="drag" data-draggable-containment="parent" data-axis="x" style="left: 20%;"></b><!--ms-if--><!--ms-if--></div>
+                    </div>
+                    <div class="u-input-group">
+                        <input type="text" class="u-textbox  u-textbox-time" size="4">
+                        <span class="u-units">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 循环次数 -->
+            <div class="c-conf-row">
+                <label class="c-input-label">执行次数</label>
+                <div class="c-input-box">
+                    <div class="u-slider f-mr-14">
+                        <div data-slider-min="1" data-slider-max="10" class="oni-helper-hidden-accessible" avalonctrl="$coms_outAnime_count_slider" style="display: none; height: 0px; width: 0px; padding: 0px;"></div><div class="oni-slider oni-widget oni-corner-all oni-slider-horizontal"><!--ms-if--><b class="oni-slider-handle oni-corner-all" data-draggable-start="dragstart" data-draggable-stop="dragend" data-draggable-drag="drag" data-draggable-containment="parent" data-axis="x" style="left: 0%;"></b><!--ms-if--><!--ms-if--></div>
+                    </div>
+                    <div class="u-input-group">
+                        <input type="text" class="u-textbox u-textbox-time" size="4">
+                        <span class="u-units">&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 无限循环 -->
+            <div class="c-conf-row c-conf-row-2">
+                <div class="c-input-box c-input-box-l">
+                    <label class="u-label">
+                        无限循环
+                        <input type="checkbox" class="u-checkbox">
+                        <i class="icon-checkbox"></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="c-conf-row">
+                <div class="f-fix f-mt-15" style="position: relative">
+                    <label class="f-float-l f-mt-2" style="color:#333;font-size:12px;">
+                        动画说明
+                    </label>
+                    <div class="f-float-r flag">
+
+                    </div>
+
+                    <div class="tips-area" style="left:50px">
+                        <div class="info">
+                            <div class="info-pop" style="left:-50px;top:-132px;height: 105px;padding:10px">
+                                1、【开始时间】进入本页后，组件动画开始播放的时间；<br>
+                                2、【持续时间】指动画播放持续的时间，时间越长，动作越慢；<br>
+                                3、【执行次数】是指动画循环播放的次数；<br>
+                                4、【无限循环】是指动画播放次数为无限循环。
+                                <i style="left:53px"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 位置 大小 开始 -->
+<div config-component-position-directive></div>

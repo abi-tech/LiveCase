@@ -13,7 +13,7 @@ mainModule.controller('editorController',['$scope', '$http', function ($scope, $
 
     $scope.$on('animation.active', function(event, animation){ 
         var effect = animation.effect; 
-        effect = "zoomIn"; console.log(effect);
+        effect = "zoomIn"; 
         $('#editorFrame').addClass(effect + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass(effect + ' animated');
         });

@@ -1,9 +1,9 @@
 var components = [
-    { type: "singleimage", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
+    { name: "图片", type: "singleimage", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
       backgroundColor: "none", borderWidth: 0, borderColor: "none", borderRadius: 0, opacity: 100 },
-    { type: "singletext", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
+    { name: "文本", type: "singletext", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
       backgroundColor: "none", borderWidth: 0, borderColor: "none", borderRadius: 0, opacity: 100 },
-    { type: "externallinks", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
+    { name: "按钮", type: "externallinks", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
       backgroundColor: "none", borderWidth: 0, borderColor: "none", borderRadius: 0, opacity: 100 },
 ];
 //border-radius: 33px; transform: rotate(149deg); opacity: 0.43; border-width: 0px;
@@ -24,8 +24,28 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
             autoTurnPage: true,
             autoTurnPageDelay: 0,
             lockTurnPage: true,
-            components: [{ type: "singleimage", text: "哈哈哈", width: 200, height: 70, top: 822, left: 217, zIndex: 10000, rotate: 0,
-      backgroundColor: "none", borderWidth: 0, borderColor: "none", borderRadius: 0, opacity: 100 },{
+            components: [{
+                name: "图片",
+                type: "singleimage",
+                text: "点击打开1",
+                width: 200,
+                height: 70,
+                top: 622,
+                left: 217,
+                zIndex: 10000,
+                rotate: 0,
+                backgroundImage: "none",
+                backgroundColor: "#000000",
+                borderWidth: 10,
+                borderColor: "#FD2500",
+                borderRadius: 50,
+                opacity: 100,
+                fontFamily: "",
+                fontColor: "",
+                fontSize: "",
+                display: "text"
+            },{
+                name: "按钮",
                 type: "externallinks",
                 text: "点击打开1",
                 width: 200,
@@ -45,6 +65,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 fontSize: "",
                 display: "text"
             },{
+                name: "按钮",
                 type: "externallinks",
                 text: "点击打开2",
                 width: 200,

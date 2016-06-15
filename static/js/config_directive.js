@@ -216,36 +216,45 @@ mainModule.directive('configComponentHeaderDirective', function () {
 });
 
 //组件配置 样式 和 动画
+var data_tabs = [
+    { name: "样式", settings: [{ "text":"", "info":"" }] }, 
+    { name: "动画", settings: [] }
+];
+
 var tpl_config_component_tab = [
     '<section class="c-conf-section c-conf-tabSection">',
         '<ul class="u-tab z-singleLine">',
             '<li><a href="javascript:void(0);" style="border-left:none;" class="z-active">样式</a></li>',
-            '<li><a href="javascript:void(0);" class="">动画</a></li>',
+            '<li><a href="javascript:void(0);">动画</a></li>',
         '</ul>',
-    '</section>',
+    '</section>'
 ].join('');
 
 mainModule.directive('configComponentTabDirective', function ($rootScope) {
     return {
-        restrict: 'AE',
-        replace: true,
-        template: tpl_config_component_tab,
-        link: function (scope, element, attrs) {
-            //$("ul>li>a").onclick
+        restrict: 'A',
+        controller: function(){
+            console.log("controller");
+        },
+        compile: function (element, attrs, transclude) {
+            console.log("compile");
+            $("ul>li>a").on('click', function(){
+                $("ul>li>a").removeClass("z-active");
+                $(this).addClass("z-active");
+            });
+            return function(scope, element, attrs, controller){
+                console.log(scope, element, attrs, controller);
+            };
         }
     };
 });
-
-var tpl_config_component_tab_panel = [
-    '<section class="c-conf-section c-conf-style z-expand">',
-    '</section>',
-].join('');
 
 mainModule.directive('configComponentTabPanelDirective', function ($rootScope) {
     return {
         restrict: 'A',
         compile: function (element, attrs, transclude) {
-            element.append('<div config-component-animation-panel-directive></div>');
+            element.append('<div config-component-style-panel-directive></div>');
+            //element.append('<div config-component-animation-panel-directive></div>');
             //console.log(scope, element, attrs, transclude);
             //$("ul>li>a").onclick
             return function(scope, element, attrs, controller){
@@ -257,11 +266,27 @@ mainModule.directive('configComponentTabPanelDirective', function ($rootScope) {
 
 var tpl_config_component_animation_panel = [
     '<section class="c-conf-section c-conf-style z-expand">',
-        '',
+        '<div class="c-conf-row">',
+            '<ul class="u-tab z-singleLine f-mb-10">',
+                '<li><a href="javascript:void(0);" class="z-active">入场动画</a></li>',
+                '<li><a href="javascript:void(0);" class="">出场动画</a></li>',
+            '</ul>',
+        '</div>',
     '</section>',
 ].join('');
 
-var tpl_config_component_tab_style_panel = [
+mainModule.directive('configComponentAnimationPanelDirective', function ($rootScope) {
+    return {
+        restrict: 'AE',
+        replace: true,
+        template: tpl_config_component_animation_panel,
+        link: function (scope, element, attrs, ctrl) {
+            //element.append('1111');
+        }
+    };
+});
+
+var tpl_config_component_style_panel = [
     '<section class="c-conf-section c-conf-style z-expand">',
         '<div class="c-conf-panel">',
             '<div class="c-conf-row">',
@@ -332,22 +357,11 @@ var tpl_config_component_tab_style_panel = [
     '</section>'
 ].join('');
 
-mainModule.directive('configComponentAnimationPanelDirective', function ($rootScope) {
-    return {
-        restrict: 'AE',
-        replace: true,
-        template: tpl_config_component_animation_panel,
-        link: function (scope, element, attrs, ctrl) {
-            //element.append('1111');
-        }
-    };
-});
-
 mainModule.directive('configComponentStylePanelDirective', function ($rootScope) {
     return {
         restrict: 'AE',
         replace: true,
-        template: tpl_config_component_tab_style_panel,
+        template: tpl_config_component_style_panel,
         link: function (scope, element, attrs) {
             scope.$watch('currentComponent', function(newValue, oldValue) { 
                 if(newValue == null) return;

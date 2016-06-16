@@ -48,7 +48,7 @@ mainModule.directive('configPageBackgroundDirective', function ($rootScope) {
         link: function (scope, element, attrs) {
         	//绑定事件 弹出对话框选择背景图片
         	$("div.c-background-btn", element).on('click', function(){
-        		console.log("choose background image!");
+        		//console.log("choose background image!");
                 //$rootScope.currentPage.style["background-image"] = $(this).css("background-color");
                 //$rootScope.$apply();
         	});
@@ -167,7 +167,7 @@ mainModule.directive("configPageSectionDirective", ['$rootScope', function ($roo
                     //scope.$emit("animation.active", scope.animation);
                     $("ul>li>a", element).removeClass("z-active");
                     $(this).addClass("z-active");
-                    console.log($(this).data("effect"));
+                    //console.log($(this).data("effect"));
                     $rootScope.currentPage.animation.effect = $(this).data("effect");
                 });
 
@@ -234,16 +234,16 @@ mainModule.directive('configComponentTabDirective', function ($rootScope) {
     return {
         restrict: 'A',
         controller: function(){
-            console.log("controller");
+            //console.log("controller");
         },
         compile: function (element, attrs, transclude) {
-            console.log("compile");
+            //console.log("compile");
             $("ul>li>a").on('click', function(){
                 $("ul>li>a").removeClass("z-active");
                 $(this).addClass("z-active");
             });
             return function(scope, element, attrs, controller){
-                console.log(scope, element, attrs, controller);
+                //console.log(scope, element, attrs, controller);
             };
         }
     };
@@ -258,7 +258,7 @@ mainModule.directive('configComponentTabPanelDirective', function ($rootScope) {
             //console.log(scope, element, attrs, transclude);
             //$("ul>li>a").onclick
             return function(scope, element, attrs, controller){
-                console.log(scope, element, attrs, controller);
+                //console.log(scope, element, attrs, controller);
             };
         }
     };
@@ -288,72 +288,11 @@ mainModule.directive('configComponentAnimationPanelDirective', function ($rootSc
 
 var tpl_config_component_style_panel = [
     '<section class="c-conf-section c-conf-style z-expand">',
-        '<div class="c-conf-panel">',
-            '<div class="c-conf-row">',
-                '<label class="c-input-label">背景</label>',
-                '<div class="c-input-box">',
-                    '<div class="u-colorpicker">',
-                        '<input type="text" id="backgroundColor" style="color: rgb(0, 0, 0); background: rgb(225, 225, 225);">',
-                        '<a href="javascript:void(0);" class="small"> <i class="icon-x20 icon-x20-color"></i>',
-                        '</a>',
-                    '</div>',
-                '</div>',
-            '</div>',
-        '</div>',
-        '<div class="c-conf-panel">',
-            '<div class="c-conf-row">',
-                '<label class="c-input-label" for="borderWidth">边框</label>',
-                '<div class="c-input-box">',
-                    '<div class="u-spinner">',
-                        '<input id="borderWidth" type="text" value="" ng-model="currentComponent.borderWidth"/>',
-                    '</div>',
-                    '<div class="u-colorpicker f-ml-6">',
-                        '<input type="text" id="borderColor" avalonctrl="$coms_borderColor_colorpicker" data-duplex-changed="initCp" style="color: rgb(0, 0, 0); background: rgb(204, 204, 204);">',
-                        '<a href="javascript:void(0);" class="small"> <i class="icon-x20 icon-x20-color"></i>',
-                        '</a>',
-                    '</div>',
-                '</div>',
-            '</div>',
-        '</div>',
-        '<div class="c-conf-panel">',
-            '<div class="c-conf-row">',
-                '<label class="c-input-label" for="borderRadius">圆角</label>',
-                '<div class="c-input-box">',
-                    '<div class="u-slider f-mr-14">',
-                        '<div style="top:-26px; position:relative">',
-                            '<input id="borderRadiusSlider" type="hidden" value="0;50" />',
-                        '</div>',
-                    '</div>',
-                    '<input style="top:-4px; position:relative" type="text" id="borderRadius" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.borderRadius">',
-                '</div>',
-            '</div>',
-        '</div>',
-        '<div class="c-conf-panel">',
-            '<div class="c-conf-row">',
-                '<label class="c-input-label" for="opacity">透明</label>',
-                '<div class="c-input-box">',
-                    '<div class="u-slider f-mr-14">',
-                        '<div style="top:-26px; position:relative">',
-                            '<input id="opacitySlider" type="hidden" value="0;100" />',
-                        '</div>',
-                    '</div>',
-                    '<input style="top:-4px; position:relative" type="text" id="opacity" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.opacity">',
-                '</div>',
-            '</div>',
-        '</div>',
-        '<div class="c-conf-panel">',
-            '<div class="c-conf-row c-conf-row-2">',
-                '<label class="c-input-label" for="rotate">旋转</label>',
-                '<div class="c-input-box">',
-                    '<div class="u-slider f-mr-14">',
-                        '<div style="top:-26px; position:relative">',
-                            '<input id="rotateSlider" type="hidden" value="0;360" />',
-                        '</div>',
-                    '</div>',
-                    '<input style="top:-4px; position:relative" type="text" id="rotate" class="u-textbox u-textbox-medium f-ml-4" size="6" ng-model="currentComponent.rotate">',
-                '</div>',
-            '</div>',
-        '</div>',
+        '<div panel-name="背景" panel-option="data_config_panels[0]" confing-panel></div>',
+        '<div panel-name="边框" panel-option="data_config_panels[1]" confing-panel></div>',
+        '<div panel-name="圆角" panel-option="data_config_panels[2]" confing-panel></div>',
+        '<div panel-name="透明" panel-option="data_config_panels[3]" confing-panel></div>',
+        '<div panel-name="旋转" panel-option="data_config_panels[4]" confing-panel></div>',
     '</section>'
 ].join('');
 
@@ -363,56 +302,7 @@ mainModule.directive('configComponentStylePanelDirective', function ($rootScope)
         replace: true,
         template: tpl_config_component_style_panel,
         link: function (scope, element, attrs) {
-            scope.$watch('currentComponent', function(newValue, oldValue) { 
-                if(newValue == null) return;
-
-                var borderRadius = scope.currentComponent.borderRadius || 0;
-                var opacity = scope.currentComponent.opacity || 0;
-                var rotate = scope.currentComponent.rotate || 0;
-
-                console.log(borderRadius, opacity, rotate);
-                $("#borderRadiusSlider", element).ionRangeSlider({
-                    type: "single",
-                    min: 0,
-                    max: 50,
-                    from: borderRadius,
-                    hide_min_max: true,
-                    hide_from_to: true,
-                    grid: false,
-                    onChange: function (data) { 
-                        scope.currentComponent.borderRadius = data.from;
-                        scope.$apply();
-                    }
-                }).data("ionRangeSlider").update({ from : borderRadius });
-
-                $("#opacitySlider", element).ionRangeSlider({
-                    type: "single",
-                    min: 0,
-                    max: 100,
-                    from: opacity,
-                    hide_min_max: true,
-                    hide_from_to: true,
-                    grid: false,
-                    onChange: function (data) {
-                        scope.currentComponent.opacity = data.from;
-                        scope.$apply();
-                    }
-                }).data("ionRangeSlider").update({ from : opacity });
-
-                $("#rotateSlider", element).ionRangeSlider({
-                    type: "single",
-                    min: 0,
-                    max: 360,
-                    from: rotate,
-                    hide_min_max: true,
-                    hide_from_to: true,
-                    grid: false,
-                    onChange: function (data) {
-                        scope.currentComponent.rotate = data.from;
-                        scope.$apply();
-                    }
-                }).data("ionRangeSlider").update({ from : rotate });
-            });
+            
         }
     };
 });

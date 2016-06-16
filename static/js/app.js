@@ -1,5 +1,5 @@
 var mainModule = angular.module("mainModule", []);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(document, ["mainModule"]);
+	angular.bootstrap(document, ["mainModule"]);
 });

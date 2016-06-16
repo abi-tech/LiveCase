@@ -217,7 +217,7 @@ mainModule.directive('configComponentHeaderDirective', function () {
 
 //组件配置 样式 和 动画
 var data_tabs = [
-    { name: "样式", settings: [{ "text":"", "info":"" }] }, 
+    { name: "样式", settings: [{ "label":"", "info":"", "":"" }] }, 
     { name: "动画", settings: [] }
 ];
 

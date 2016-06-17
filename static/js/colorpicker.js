@@ -92,9 +92,9 @@
 
 		var $html = $(html), options = this.options, $element = this.$element;
 
-		$html.find(".oni-colorpicker").hide();
+		this.$html = $html;
 
-		$("body").append($html);
+		$html.find(".oni-colorpicker").hide();
 
 		$element.replaceWith($html);
 		$("div.oni-colorpicker-color-list>div.color-box", $html).on("click", function(e){
@@ -119,10 +119,23 @@
 
 	}
 
+	ColorPicker.prototype.show = function(){
+		this.$html.find(".oni-colorpicker").show();
+	}
+
+	ColorPicker.prototype.hide = function(){
+		this.$html.find(".oni-colorpicker").hide();
+	}
+
+	ColorPicker.prototype.toggle = function(){
+		this.$html.find(".oni-colorpicker").toggle();
+	}
+
 	$.fn.colorpicker = function (options) {
-        return $.each(this, function(i, element){
+        return $.map(this, function(element){
         	var colorPicker = new ColorPicker(element, options);
         	colorPicker.init();
+        	return colorPicker;
         });
     }
 })(jQuery, window, document);

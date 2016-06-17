@@ -41,8 +41,10 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 borderRadius: 50,
                 opacity: 100,
                 fontFamily: "",
-                fontColor: "",
-                fontSize: "",
+                fontColor: "#FF00FF",
+                fontSize: 1.625,
+                fontStyle: [], 
+                textAlign: "center",
                 display: "text"
             },{
                 name: "按钮",
@@ -61,8 +63,10 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 borderRadius: 50,
                 opacity: 100,
                 fontFamily: "",
-                fontColor: "",
-                fontSize: "",
+                fontColor: "#FF00FF",
+                fontSize: 1.625,
+                fontStyle: [], 
+                textAlign: "center",
                 display: "text"
             },{
                 name: "按钮",
@@ -81,8 +85,10 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 borderRadius: 50,
                 opacity: 100,
                 fontFamily: "",
-                fontColor: "",
-                fontSize: "",
+                fontColor: "#FF00FF",
+                fontSize: 1.625,
+                fontStyle: ["", "", ""], 
+                textAlign: "center",
                 display: "icon"
             }]
         }],

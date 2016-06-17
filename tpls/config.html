@@ -219,69 +219,12 @@
                             </div>
                             <div class="c-font-setting">
                                 <ul>
-                                    <li class="dropdown font-size">
-                                        <a class="small"><div class="icon-x16 x-icon-font-size"></div></a>
-                                    </li>
-                                    <li class="font-color">
-                                        <input avalonctrl="colorpicker0297852552659216844201394812316981" data-duplex-changed="initCp" class="dropdown font-color" style="color: rgb(255, 255, 255); background: rgb(255, 255, 255);">
-                                        <div class="font-color-layer" style="background-color: rgb(255, 255, 255);"></div>
-                                        <a class="small"><div class="icon-x16 x-icon-font-color"></div></a>
-                                    </li>
-                                    <li class="dropdown text-align">
-                                        <a class="small"><div class="icon-x16 x-icon-text-align x-icon-center"></div></a>
-                                    </li>
-                                    <li class="dropdown font-style">
-                                        <a class="small"><div class="icon-x16 x-icon-font-style"></div></a>
-                                    </li>
+                                    <div ng-model="currentComponent.fontSize" ipr-fontsize></div>
+                                    <div ng-model="currentComponent.fontColor" ipr-fontcolor></div>
+                                    <div ng-model="currentComponent.textAlign" ipr-textalign></div>
+                                    <div ng-model="currentComponent.fontStyle" ipr-fontstyle></div>
                                 </ul>
-                                <ul class="dropdown-list" type="font-size-list" style="display: none;">
-                                    
-                                    <li value="0">18</li>
-                                    <li value="0">20</li>
-                                    <li value="0">22</li>
-                                    <li value="0">24</li>
-                                    <li value="0" class="selected">26</li>
-                                    <li value="0">28</li>
-                                    <li value="0">30</li>
-                                    <li value="0">32</li>
-                                    <li value="0">34</li>
-                                    <li value="0">36</li>
-                                    <li value="0">38</li>
-                                    <li value="0">40</li>
-                                    <li value="0">42</li>
-                                    <li value="0">44</li>
-                                    <li value="0">46</li>
-                                    <li value="0">48</li>
-                                    <li value="0">50</li>
-                                    <li value="0">52</li>
-                                    <li value="0">54</li>
-                                    <li value="0">56</li>
-                                    <li value="0">58</li>
-                                    <li value="0">60</li>
-                                    <li value="0">62</li>
-                                    <li value="0">64</li>
-                                    <li value="0">72</li>
-                                    <li value="0">96</li>
-                                    <li value="0">100</li>
-                                    <li value="0">200</li>
-                                    <li value="0">300</li>
-                                    <li value="0">400</li>
-                                    <li value="0">500</li>
-                                </ul>
-                                <ul class="dropdown-list" type="text-align-list" style="display: none;">
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-left"></div></a>
-                                    </li>
-                                    <li class="selected">
-                                        <a class="small"><div class="icon-x16 x-icon-center"></div></a>
-                                    </li>
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-right"></div></a>
-                                    </li>
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-justify"></div></a>
-                                    </li>
-                                </ul>
+                                
                                 <ul class="dropdown-list" type="font-style-list" style="display: none;">
                                     <li>
                                         <a class="small"><div class="icon-x16 x-icon-b"></div></a>

@@ -26,6 +26,7 @@ mainModule.directive('iprColorpicker', function() {
 
             var init = function () { 
             	element.colorpicker({
+                    offset: { top: 25, left: -215 },
             		onChange: function(color){
             			ngModelController.$setViewValue(color);
 	                	ngModelController.$render();

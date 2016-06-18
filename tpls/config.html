@@ -25,7 +25,7 @@
                                 <a class="small"><div class="icon-x16 x-icon-font-size"></div></a>
                             </li>
                             <li class="font-color">
-                                <input avalonctrl="colorpicker38370904118951728970747686670673" data-duplex-changed="initCp" class="dropdown font-color" style="color: rgb(255, 255, 255); background: rgb(51, 51, 51);">
+                                <input class="dropdown font-color" style="color: rgb(255, 255, 255); background: rgb(51, 51, 51);">
                                 <div class="font-color-layer" style="background-color: rgb(51, 51, 51);"></div>
                                 <a class="small"><div class="icon-x16 x-icon-font-color"></div></a>
                             </li>
@@ -219,22 +219,10 @@
                             </div>
                             <div class="c-font-setting">
                                 <ul>
-                                    <div ng-model="currentComponent.fontSize" ipr-fontsize></div>
-                                    <div ng-model="currentComponent.fontColor" ipr-fontcolor></div>
-                                    <div ng-model="currentComponent.textAlign" ipr-textalign></div>
-                                    <div ng-model="currentComponent.fontStyle" ipr-fontstyle></div>
-                                </ul>
-                                
-                                <ul class="dropdown-list" type="font-style-list" style="display: none;">
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-b"></div></a>
-                                    </li>
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-i"></div></a>
-                                    </li>
-                                    <li>
-                                        <a class="small"><div class="icon-x16 x-icon-u"></div></a>
-                                    </li>
+                                    <div ng-model="currentComponent.style.fontSize" ipr-fontsize></div>
+                                    <div ng-model="currentComponent.style.color" ipr-fontcolor></div>
+                                    <div ng-model="currentComponent.style.textAlign" ipr-textalign></div>
+                                    <div ng-model="currentComponent.style" ipr-fontstyle></div>
                                 </ul>
                             </div>
                         </div>
@@ -263,9 +251,8 @@
 
                 <div class="c-conf-panel"></div>
             </section>
-            <!-- 组件外观 -->
-            <div ng-if="(currentComponent != null)" config-component-tab-directive></div>
-            <div ng-if="(currentComponent != null)" config-component-tab-panel-directive></div>
+            <!-- 组件外观 <div ng-if="(currentComponent != null)" config-component-tabsection></div> -->
+            <div ng-if="(currentComponent != null)" tab-options="data_ui_tab_facade" ui-tab></div>
 
             <!-- 位置 大小 结束 -->
             <div ng-if="(currentComponent != null)" config-component-position-directive></div>

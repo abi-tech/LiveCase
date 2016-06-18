@@ -12,7 +12,7 @@ mainModule.directive('configDirective', function () {
         replace : true,
         templateUrl : 'tpls/config.html',
         link : function (scope, element, attrs) {
-            scope.$watch('currentComponent', function(newValue, oldValue) { console.log(scope.currentPage);
+            scope.$watch('currentComponent', function(newValue, oldValue) {
                 if(scope.currentComponent == null){ 
                     
                     
@@ -99,14 +99,14 @@ mainModule.directive('audioDirective',[ '$rootScope', function (rootScope) {
         }
     };
 }]);
-
+//style="text-align: {{component.textAlign}};"color: {{component.fontColor}}; font-size: {{component.fontSize}}em; font-weight: {{component.fontWight}}; font-style: {{component.fontStyle}};text-decoration: {{component.textDecoration}};
 var tpl = [
     '<div ng-click="setCurrentComponent(component)" class="f-abs c-c-container" ng-attr-data-id="{{component.id}}" >',
         '<div class="">',
             '<div class="c-externallinks content" src="../tpl/components/links/externallinks/img/layer-default.png">',
                 '<a class="f-fix link" href="javascript:;" address="" phone="">',
-                    '<div class="btn-txt" style="color: rgb(255, 255, 255); font-size: {{component.fontSize}}em;">',
-                        '<div class="btn-info" style="text-align: {{component.textAlign}};">{{component.text}}</div>',
+                    '<div class="btn-txt" ng-style="component.style">',
+                        '<div class="btn-info">{{component.text}}</div>',
                     '</div>',
                 '</a>',
             '</div>',
@@ -119,8 +119,8 @@ var tpl_component_container = [
       '<div class="">',
         '<div class="c-externallinks content" inside-styles>',
           '<a class="f-fix link" href="javascript:;" address="" phone="">',
-            '<div class="btn-txt" style="color: rgb(255, 255, 255); font-size: {{component.fontSize}}em;">',
-              '<div class="btn-info" style="text-align: {{component.textAlign}};">{{component.text}}</div>',
+            '<div class="btn-txt" ng-style="component.style">',
+              '<div class="btn-info">{{component.text}}</div>',
             '</div>',
           '</a>',
         '</div>',

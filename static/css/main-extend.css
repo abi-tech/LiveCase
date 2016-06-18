@@ -768,7 +768,7 @@
     left: 0;
     right: 0;
     top: 27px;
-    z-index: 100;
+    z-index: -111111111;
     text-align: center;
     background-color: white;
     border: 1px solid #ccc;

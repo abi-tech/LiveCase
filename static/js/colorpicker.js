@@ -53,33 +53,38 @@
 		{ "color": "#4B1431" }
 	]};
 
-	var tpl_colorpicker = [
+	var tpl_colorpicker_wrapper = [
 	'<div class="u-colorpicker f-ml-6" style="position:relative;overflow:visible;">',
 	    '<input type="text" style="color: rgb(0, 0, 0); background: rgb(204, 204, 204);">',
 	    '<a href="javascript:void(0);" class="small"><i class="icon-x20 icon-x20-color"></i></a>',
-	    '<div class="oni-colorpicker" style="height: 184px; display: none; position:absolute;">',
-			'<div class="oni-colorpicker-color-list">',
-			    '{{ each colors as color i}}',
-				'<div class="color-box" style="background-color: {{ color.color }};">',
-					'{{ if color.src != null }}',
-					'<img src="{{ color.src }}">',
-					'{{ /if }}',
-				'</div>',
-				'{{ /each }}',
-				'<hr>',
-				'<div class="switch">',
-					'<div class="title">更多颜色</div>',
-					'<div class="u-iphone-switch switch-bg">',
-						'<div class="switch-btn"></div>',
-					'</div>',
+	'</div>'
+	].join('');
+
+	var tpl_colorpicker = [
+	'<div class="oni-colorpicker" style="height: 184px; display: none; position:absolute;">',
+		'<div class="oni-colorpicker-color-list">',
+		    '{{ each colors as color i}}',
+			'<div class="color-box" style="background-color: {{ color.color }};">',
+				'{{ if color.src != null }}',
+				'<img src="{{ color.src }}">',
+				'{{ /if }}',
+			'</div>',
+			'{{ /each }}',
+			'<hr>',
+			'<div class="switch">',
+				'<div class="title">更多颜色</div>',
+				'<div class="u-iphone-switch switch-bg">',
+					'<div class="switch-btn"></div>',
 				'</div>',
 			'</div>',
 		'</div>',
-	'</div>'
+	'</div>',
 	].join('');
 
 	var ColorPicker = function (element, options) {
 		this.defaults = {
+			showIcon: true,
+			offset: { top: 0, left: 0 },
 			onChange: function(color){}
 		};
 		this.$element = $(element);
@@ -88,47 +93,59 @@
 
 	ColorPicker.prototype.init = function () {
 
-		var html = template.compile(tpl_colorpicker)(data_colorpicker);
+		var picker = template.compile(tpl_colorpicker)(data_colorpicker);
 
-		var $html = $(html), options = this.options, $element = this.$element;
+		var $wapper = $(tpl_colorpicker_wrapper), 
+		    $picker = $(picker), 
+		    options = this.options, 
+		    $element = this.$element;
 
-		this.$html = $html;
+		this.$wapper = $wapper;
+		this.$picker = $picker;
 
-		$html.find(".oni-colorpicker").hide();
+		$wapper.append($picker);
+		$wapper.find(".oni-colorpicker").hide();
 
-		$element.replaceWith($html);
-		$("div.oni-colorpicker-color-list>div.color-box", $html).on("click", function(e){
+		if(!options.showIcon){
+			$wapper.removeClass();
+			$wapper.find("input").hide();
+			$wapper.find("a.small").hide();
+		}
+		
+		var top = $element.offset().top;
+		var left = $element.offset().left;
+		$wapper.find(".oni-colorpicker").css("top", options.offset.top);
+		$wapper.find(".oni-colorpicker").css("left", options.offset.left );
+
+		$element.replaceWith($wapper);
+		$("div.oni-colorpicker-color-list>div.color-box", $wapper).on("click", function(e){
 			e.stopPropagation();
 			var color = $(this).css("background-color");
 			options.onChange(color);
 		})
 
 		$("body").on("click", function(){
-			$html.find(".oni-colorpicker").hide();
+			$wapper.find(".oni-colorpicker").hide();
 		});
 
-		$html.on("click", function(e){
+		$wapper.on("click", function(e){
 			e.stopPropagation();
 			$("body").find(".oni-colorpicker").hide();
-			var top = $element.offset().top;
-			var left = $element.offset().left;
-			$html.find(".oni-colorpicker").css("top", $html.outerHeight());
-			$html.find(".oni-colorpicker").css("right", 0);
-			$html.find(".oni-colorpicker").toggle();
+			$wapper.find(".oni-colorpicker").toggle();
 		});
 
 	}
 
 	ColorPicker.prototype.show = function(){
-		this.$html.find(".oni-colorpicker").show();
+		this.$wapper.find(".oni-colorpicker").show();
 	}
 
 	ColorPicker.prototype.hide = function(){
-		this.$html.find(".oni-colorpicker").hide();
+		this.$wapper.find(".oni-colorpicker").hide();
 	}
 
-	ColorPicker.prototype.toggle = function(){
-		this.$html.find(".oni-colorpicker").toggle();
+	ColorPicker.prototype.toggle = function(){ 
+		this.$wapper.find(".oni-colorpicker").toggle();
 	}
 
 	$.fn.colorpicker = function (options) {

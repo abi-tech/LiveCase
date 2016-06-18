@@ -17,7 +17,7 @@ mainModule.directive('inputboxSlider', function() {
         scope: {},
         replace: true,
         template: tpl_inputbox_slider,
-        link: function(scope, iElement, iAttrs, ngModelController) { 
+        link: function(scope, iElement, iAttrs, ngModelController) {
         	var min = parseFloat(iAttrs.sliderMin),
                 max = parseFloat(iAttrs.sliderMax),
                 slider = null,
@@ -66,54 +66,8 @@ mainModule.directive('inputboxSlider', function() {
     };
 });
 
-var data_config_panels = [
-	{ "name": "背景", "inputs": [
-		{ "inputHtml": "<div ng-model=\"currentComponent.backgroundColor\" ipr-colorpicker></div>" }
-	]},
-	{ "name": "边框", "inputs": [
-		{ "inputHtml": "<div ng-model=\"currentComponent.borderWidth\" stepper-min=\"0\" stepper-max=\"10\" stepper-step=\"1\" ipr-stepper></div>" },
-		{ "inputHtml": "<div ng-model=\"currentComponent.borderColor\" ipr-colorpicker></div>" }
-	]},
-	{ "name": "圆角", "inputs": [
-		{ "inputHtml": "<div ng-model=\"currentComponent.borderRadius\" slider-min=\"0\" slider-max=\"50\" inputbox-slider></div>" }
-	]},
-	{ "name": "透明", "inputs": [
-		{ "inputHtml": "<div ng-model=\"currentComponent.opacity\" slider-min=\"0\" slider-max=\"100\" inputbox-slider></div>" }
-	]},
-	{ "name": "旋转", "inputs": [
-		{ "inputHtml": "<div ng-model=\"currentComponent.rotate\" slider-min=\"0\" slider-max=\"360\" inputbox-slider></div>" }
-	]}
-];
 
-var tpl_config_panel = [
-'<div class="c-conf-panel">',
-    '<div class="c-conf-row">',
-        '<label class="c-input-label"></label>',
-        '<div class="c-input-box"></div>',
-    '</div>',
-'</div>'
-].join('');
 
-mainModule.directive('confingPanel', function() {
-    return {
-        restrict: 'AE',
-        compile: function(element, attrs){ 
-        	var $panel = $(tpl_config_panel),
-        	    panelName = attrs.panelName,
-        	    options = eval(attrs.panelOption);
-
-        	$panel.find(".c-input-label").text(panelName);
-        	for (var i = 0; i < options.inputs.length; i++) {
-        		$panel.find(".c-input-box").append(options.inputs[i].inputHtml);
-        	}
-        	
-        	element.replaceWith($panel);
-        	return function(scope, element, attrs, controller){
-        		
-        	}
-        }
-    };
-});
 
 var tpl_confing_section = [
 ].join('');

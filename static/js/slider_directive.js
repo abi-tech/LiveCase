@@ -20,6 +20,7 @@ mainModule.directive('inputboxSlider', function() {
         link: function(scope, iElement, iAttrs, ngModelController) {
         	var min = parseFloat(iAttrs.sliderMin),
                 max = parseFloat(iAttrs.sliderMax),
+                step = parseFloat(iAttrs.sliderStep) || 1,
                 slider = null,
                 $slider = iElement.find('input[type="hidden"]'),
                 $input = iElement.find('input[type="text"]'),
@@ -44,6 +45,7 @@ mainModule.directive('inputboxSlider', function() {
 	                type: "single",
 	                min: min,
 	                max: max,
+                    step: step,
 	                from: 0,
 	                hide_min_max: true,
 	                hide_from_to: true,

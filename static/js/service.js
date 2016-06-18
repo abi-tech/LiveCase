@@ -18,8 +18,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
 
         pages: [{ 
             style: { "background-color": "#ffffff", "background-image": "none"},
-            animIn: { "type": "", "name": "缩放", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
-            animOut: { "type": "", "name": "缩放", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
+            animation: { "type": "", "name": "缩放", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
             turnPage: { "id": "3", "name": "DownArrow", "url": "static/images/slideDown.png" },
             applyAllPages: true,
             autoTurnPage: true,
@@ -43,8 +42,8 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 opacity: 100,
                 style: { color: "#FFFFFF", fontSize: "1.625em", textAlign: "center", fontFamily: "", fontWeight: "", fontStyle: "", textDecoration: "" },
                 display: "text",
-                animIn: { "type": "zoomIn", "typeName": "渐进放大", "name": "渐进放大", "effect": "slideZoomIn", "duration": 1, "delay": 0 },
-                animOut: { "type": "zoomOut", "typeName": "渐进缩小", "name": "渐进缩小", "effect": "slideZoomOut", "duration": 1, "delay": 0 }
+                animIn: { "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1 },
+                animOut: null
             }]
         }],
 

@@ -123,7 +123,7 @@ var tpl_config_panel = [
 
 mainModule.directive('confingPanel', function() {
     return {
-        restrict: 'AE',
+        restrict: 'A',
         compile: function(element, attrs){ 
             var $panel = $(tpl_config_panel),
                 panelName = attrs.panelName,
@@ -142,6 +142,32 @@ mainModule.directive('confingPanel', function() {
     };
 });
 
+var tpl_config_row = [
+'<div class="c-conf-row">',
+    '<label class="c-input-label"></label>',
+    '<div class="c-input-box"></div>',
+'</div>',
+].join('');
+
+mainModule.directive('confingRow', function() {
+    return {
+        restrict: 'A',
+        compile: function(element, attrs){ 
+            var $panel = $(tpl_config_row),
+                options = eval(attrs.panelOption);
+
+            $panel.find(".c-input-label").text(options.name);
+            for (var i = 0; i < options.inputs.length; i++) {
+                $panel.find(".c-input-box").append(options.inputs[i].inputHtml);
+            }
+            
+            element.replaceWith($panel);
+            return function(scope, element, attrs, controller){
+                
+            }
+        }
+    };
+});
 
 //动画面板
 var tpl_config_component_animation_panel = [
@@ -166,10 +192,10 @@ mainModule.directive('configComponentAnimationPanelDirective', function ($compil
     };
 });
 
-var tpl_config_section = '<section class="c-conf-section"></section>';
+var tpl_config_section1 = '<section class="c-conf-section"></section>';
 var tpl_config_panel1 = '<div class="c-conf-panel"></div>'
-var tpl_config_row = '<div class="c-conf-row"></div>';
-var tpl_input_box = '<div class="c-input-box"></div>';
+var tpl_config_row1 = '<div class="c-conf-row"></div>';
+var tpl_input_box1 = '<div class="c-input-box"></div>';
 //c-conf-section c-conf-panel c-conf-row c-input-box 
 //<div section-options="" config-section></div>
 var data_animation_section = [
@@ -195,28 +221,32 @@ mainModule.directive('chooseList', function ($compile) {
         replace: true,
         require: "ngModel",
         link: function (scope, element, attrs, ngModelController) {
-            var options = eval(attrs.options);
+            var options = eval(attrs.options) || scope.options;
             var $ul = $('<ul></ul>');
 
             ngModelController.$render = function() {
                 var viewValue = ngModelController.$viewValue;
-                $ul.find('.u-image-wrap[data-value="' + viewValue + '"]').addClass("z-active");
+                if(viewValue){
+                    $ul.find(".u-image-wrap").removeClass("z-active");
+                    $ul.find('.u-image-wrap[data-id="' + viewValue + '"]').addClass("z-active");
+                }else{
+                    $ul.find('.u-image-wrap').removeClass("z-active");
+                }
             }
 
             $ul.addClass(options.class);
             angular.forEach(options.list, function(data, index, array){
-                var $li = $(options.tpl);
-                $li.find(".u-image-wrap>div").addClass(data.class);
-                $li.find(".u-image-wrap").attr("data-value", data.value);
-                $li.find("p").text(data.name); console.log(data.value, ngModelController.$viewValue);
+                var $li = $(options.tpl); 
+                $li.find(".u-image-wrap>div").addClass(data.icon);
+                $li.find(".u-image-wrap").attr("data-id", data[options.id]); 
+                $li.find("p").text(data[options.name]); 
                 
                 $ul.append($li);
 
                 $li.find(".u-image-wrap").on('click', function (e) {
-                    $ul.find(".u-image-wrap").removeClass("z-active");
-                    $(this).addClass("z-active");
-                    var value = $(this).data("value");
+                    var value = $(this).data("id"); 
                     ngModelController.$setViewValue(value);
+                    ngModelController.$render();
                 });
             });
 
@@ -268,7 +298,7 @@ var tpl_animation_picker = [
                 '<label class="u-label f-float-l f-mt-4"></label>',
                 '<a href="javascript:void(0);" class="u-btn u-btn-large"></a>',
             '</div>',
-            '<div class="f-mt-8" style="display: none;">',
+            '<div class="f-mt-8">',
                 '<label class="u-label f-float-l"></label>',
                 '<a href="javascript:void(0);" class="icon-toggle f-mr-7 toggleAnime"></a>',
                 '<a href="javascript:void(0);" class="icon-play f-mr-7"></a>',
@@ -289,65 +319,138 @@ mainModule.directive('animationPicker', function ($compile) {
             var options = eval(attrs.options);
             var $fmt4 = element.find(".c-input-box>.f-mt-4");
             var $fmt8 = element.find(".c-input-box>.f-mt-8");
+            var $confPanel = element.find(".c-conf-panel");
             var $label4 = element.find(".c-input-box>.f-mt-4>.u-label");
             var $label8 = element.find(".c-input-box>.f-mt-8>.u-label")
             var $btn = element.find(".c-input-box>.f-mt-4>.u-btn");
             var $toggleAnime = element.find(".c-input-box>.f-mt-8>.icon-toggle");
             var $paly = element.find(".c-input-box>.f-mt-8>.icon-play");
             var $remove = element.find(".c-input-box>.f-mt-8>.icon-x24-remove");
-            var $content = $compile(options.dialog)(scope);
-            var $row = element.find(".c-conf-row");
+            var $dialog = $compile(options.dialog)(scope);
+            var $row = element.find(".c-conf-row-2");
             var $icon = $row.find(".link-chooseAnime>.u-image-wrap>.u-image-large");
 
             ngModelController.$render = function() {
-                var viewValue = ngModelController.$viewValue;
+                var viewValue = ngModelController.$viewValue; console.log(scope, ngModelController);
                 if(viewValue){
                     $fmt4.hide();
+                    $dialog.hide();
                     $fmt8.show();
+                    $confPanel.show();
                     $icon.removeClass();
                     $icon.addClass("u-image-large");
                     $icon.addClass("anime-" + viewValue.type);
-                    $label8.text(viewValue.typeName);
+                    $label8.text(constants.animationType[viewValue.type]);
+                    element.find(".c-conf-panel").remove();
+                    var animations = $.map(constants.animations, function (n) {
+                        if (n.type == viewValue.type) return n;
+                    });
+                    updateModel(animations[0]);
+                    initConfAnim(animations);
+                }else{
+                    $label4.text(options.noneInfo);
+                    $btn.text(options.btnInfo);
+                    $fmt4.show();
+                    $fmt8.hide();
+                    $dialog.hide();
+                    element.find(".c-conf-panel").remove();
+                    $icon.removeClass();
+                    $icon.addClass("u-image-large");
+                    $icon.addClass("undefined");
                 }
             }
 
-            function updateModel(val) {
-
+            function updateModel(animation) {
+                for (var key in animation) {
+                    ngModelController.$viewValue[key] = animation[key];
+                }
+                //scope.$parent.$apply();
             }
 
             scope.$watch(options.watch, function (newValue, oldValue) {
-                //alert(newValue + oldValue);
-                console.log(options.watch, newValue);
+                ngModelController.$render();
             });
 
-            function init(argument) {
-                $label4.text(options.noneInfo);
-                $btn.text(options.btnInfo);
-                $content.hide();
-                $row.append($content);
+            function initConfAnim(animations) {
+                scope.options = { 
+                    id: "effect",
+                    name: "name",
+                    tpl:  options.type, 
+                    class: "u-chooseList-small",
+                    list: animations
+                };
 
-                $btn.on('click', function (e) {
-                    $content.toggle();
-                });
-
-                $toggleAnime.on('click', function (e) {
-                    $content.toggle();
-                });
-
-                $paly.on('click', function (e) {
-                    $content.toggle();
-                });
-
-                $remove.on('click', function (e) {
-                    ngModelController.$setViewValue(null);
-                    $icon.addClass("u-image-large");
-                    $icon.addClass("undefined");
-                    $fmt4.show();
-                    $fmt8.hide();
-                });
+                var ctx = $compile(options.type1)(scope);
+                $fmt4.hide();
+                $fmt8.show();
+                element.append(ctx);
             }
 
-            init();
+            $row.append($dialog);
+
+            $icon.on('click', function (e) {
+                $dialog.toggle();
+            });
+            
+            $btn.on('click', function (e) {
+                $dialog.toggle();
+            });
+
+            $toggleAnime.on('click', function (e) {
+                $dialog.toggle();
+            });
+
+            $paly.on('click', function (e) {
+                $dialog.toggle();
+            });
+
+            $remove.on('click', function (e) {
+                ngModelController.$setViewValue(null);
+                ngModelController.$render();
+            });
+        }
+    };
+});
+
+var tpl_conf_anim_in = [
+'<div class="c-conf-panel f-mt-4">',
+    '<hr class="u-hr u-hr-2">',
+    '<div class="c-conf-row c-conf-row-3">',
+        '<ul class="u-chooseList-small"></ul>',
+    '</div>',
+    '<div panel-option="constants.confAnimIn[0]" confing-row></div>',
+    '<div panel-option="constants.confAnimIn[1]" confing-row></div>',
+    '<div panel-option="constants.confAnimIn[2]" confing-row></div>',
+'</div>',
+].join('');
+
+mainModule.directive('animationPicker1', function ($compile) {
+    return {
+        restrict: 'A',
+        replace: true,
+        template: tpl_animation_picker,
+        link: function (scope, element, attrs) {
+        }
+    };
+});
+var tpl_conf_anim_out = [
+'<div class="c-conf-panel f-mt-4">',
+    '<hr class="u-hr u-hr-2">',
+    '<div class="c-conf-row c-conf-row-3">',
+        '<ul class="u-chooseList-small"></ul>',
+    '</div>',
+    '<div panel-option="constants.confAnimOut[0]" confing-row></div>',
+    '<div panel-option="constants.confAnimOut[1]" confing-row></div>',
+    '<div panel-option="constants.confAnimOut[2]" confing-row></div>',
+'</div>',
+].join('');
+
+mainModule.directive('animationPicker2', function ($compile) {
+    return {
+        restrict: 'A',
+        replace: true,
+        template: tpl_animation_picker,
+        link: function (scope, element, attrs) {
         }
     };
 });

@@ -209,9 +209,9 @@ var tpl_config_component_header = [
 
 mainModule.directive('configComponentHeaderDirective', function () {
     return {
-        restrict: 'AE',
+        restrict: 'A',
         replace: true,
-        template: tpl_config_component_header,
+        template: tpl_config_component_header
     };
 });
 
@@ -223,77 +223,94 @@ var data_tabs = [
 // class="z-active"
 
 //组件配置 外观 位置信息
-var tpl_config_component_position = [
-    '<section class="c-conf-section c-conf-common">',
-        '<div class="c-conf-row c-conf-row-3">',
-            '<label class="c-input-label" for="left">位置</label>',
-            '<div class="c-input-box">',
-                '<label class="u-label f-mr-9">X轴</label>',
-                '<input type="text" id="left" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.left" />',
-                '<label class="u-label f-mr-9" for="top">Y轴</label>',
-                '<input type="text" id="top" class="u-textbox" size="10" ng-model="currentComponent.top" />',
-            '</div>',
-        '</div>',
-        '<div class="c-conf-row">',
-            '<label class="c-input-label" for="width">大小</label>',
-            '<div class="c-input-box">',
-                '<label class="u-label f-mr-9">宽</label>',
-                '<input type="text" id="width" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.width" />',
-                '<label class="u-label f-mr-9">高</label>',
-                '<input type="text" id="height" class="u-textbox" size="10" ng-model="currentComponent.height" />',
-            '</div>',
-        '</div>',
-    '</section>'
-].join(''); 
 
-mainModule.directive('configComponentPositionDirective', function () {
+
+
+//var newScope = scope.$new();
+mainModule.directive('globalConfig', function ($compile) {
     return {
-        restrict: 'AE',
+        restrict: 'A',
         replace: true,
-        template: tpl_config_component_position,
+        template: constants.templates["globalConfig"],
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;
+            var $configWrapper = element.find("section.c-config-wapper");
+            var scopes = [];
+            scope.$watch("currentPage", function (newValue, oldValue) { //console.log(scope);
+                if (newValue && newValue != null) {
+                    $configWrapper.empty();
+                }
+            });
+
+            scope.$watch("currentComponent", function (newValue, oldValue) { console.log(scope);
+                if (newValue == null || newValue != oldValue) {
+                    $configWrapper.empty();
+                    angular.forEach(scopes, function(data, index, array){
+                        data.$destroy();
+                    });
+                    scopes.length = 0;
+                }
+
+                if (newValue && newValue != null && newValue != oldValue) {
+                    switch(newValue.type){
+                        case "singleimage": render(constants.confSingleImage); break;
+                        case "singletext": render(constants.confSingleText); break;
+                        case "externallinks": render(constants.confExternalLinks); break;
+                    }
+                    
+                }
+            })
+
+            function render(directives) {
+                angular.forEach(directives, function(data, index, array){
+                    var newScope = scope.$new();
+                    scopes.push(newScope);
+                    var $content = $compile(data)(newScope);
+                    $configWrapper.append($content);
+                });
+            }
+            
+        }
     };
 });
-
-
-
-
-
 
 mainModule.directive('confHeader', function () {
     return {
         restrict: 'A',
         replace: true,
-        template: constants.templates["confHeader"],
-        link: function (scope, element, attrs) {
+        template: constants.templates.confHeader,
+        require: "ngModel",
+        link: function (scope, element, attrs, ngModelController) {
             var options = eval(attrs.options) || scope.options;
             var $icon = element.find(".c-compnent-icon");
             var $span = element.find("span");
-            $icon.css("background-image", "url('" + options.url + "')");
-            $span.text(options.name);
+
+            ngModelController.$render = function () {
+                var viewValue = ngModelController.$viewValue;
+                $icon.css("background-image", "url('" + viewValue.icon + "')");
+                $span.text(viewValue.name);
+            }
         }
     };
 });
 
-mainModule.directive('confExternallinks', function () {
+mainModule.directive('confFacade', function ($compile) {
     return {
         restrict: 'A',
-        replace: true,
-        //template: constants.templates["confHeader"],
         link: function (scope, element, attrs) {
             var options = eval(attrs.options) || scope.options;
 
-        }
-    };
-});
+            var directives = [ 
+                '<div tab-options="constants.confFacade" ui-tab></div>' 
+            ];
 
-mainModule.directive('confFacade', function () {
-    return {
-        restrict: 'A',
-        replace: true,
-        //template: constants.templates["confHeader"],
-        link: function (scope, element, attrs) {
-            var options = eval(attrs.options) || scope.options;
-
+            function render(directives) {
+                angular.forEach(directives, function(data, index, array){
+                    var $content = $compile(data)(scope);
+                    element.append($content);
+                });
+            }
+            render(directives);
         }
     };
 });
@@ -302,10 +319,39 @@ mainModule.directive('confPosition', function () {
     return {
         restrict: 'A',
         replace: true,
-        //template: constants.templates["confHeader"],
+        template: constants.templates.confPosition,
         link: function (scope, element, attrs) {
-            var options = eval(attrs.options) || scope.options;
 
+        }
+    };
+});
+
+mainModule.directive('confSingleimage', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;     
+        }
+    };
+});
+
+mainModule.directive('confSingletext', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;     
+        }
+    };
+});
+
+mainModule.directive('confExternallinks', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;     
         }
     };
 });

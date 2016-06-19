@@ -108,19 +108,19 @@ mainModule.directive('audioDirective',[ '$rootScope', function (rootScope) {
     };
 }]);
 //style="text-align: {{component.textAlign}};"color: {{component.fontColor}}; font-size: {{component.fontSize}}em; font-weight: {{component.fontWight}}; font-style: {{component.fontStyle}};text-decoration: {{component.textDecoration}};
-var tpl = [
-    '<div ng-click="setCurrentComponent(component)" class="f-abs c-c-container" ng-attr-data-id="{{component.id}}" >',
-        '<div class="">',
-            '<div class="c-externallinks content" src="../tpl/components/links/externallinks/img/layer-default.png">',
-                '<a class="f-fix link" href="javascript:;" address="" phone="">',
-                    '<div class="btn-txt" ng-style="component.style">',
-                        '<div class="btn-info">{{component.text}}</div>',
-                    '</div>',
-                '</a>',
-            '</div>',
-        '</div><div class="tl-c"></div><div class="tr-c"></div><div class="bl-c"></div><div class="br-c"></div>',
-    '</div>'
-].join('');
+// var tpl = [
+//     '<div ng-click="setCurrentComponent(component)" class="f-abs c-c-container" ng-attr-data-id="{{component.id}}" >',
+//         '<div class="">',
+//             '<div class="c-externallinks content" src="../tpl/components/links/externallinks/img/layer-default.png">',
+//                 '<a class="f-fix link" href="javascript:;" address="" phone="">',
+//                     '<div class="btn-txt" ng-style="component.style">',
+//                         '<div class="btn-info">{{component.text}}</div>',
+//                     '</div>',
+//                 '</a>',
+//             '</div>',
+//         '</div><div class="tl-c"></div><div class="tr-c"></div><div class="bl-c"></div><div class="br-c"></div>',
+//     '</div>'
+// ].join('');
 
 var tpl_component_container = [
     '<div class="f-abs c-c-container" ng-click="setCurrentComponent(component)" ng-attr-data-id="{{component.id}}">',
@@ -138,114 +138,124 @@ var tpl_component_container = [
 ].join('');
 
 
-mainModule.directive("componentDirective", ['$rootScope', 'pageService', function ($rootScope, pageService) {
+mainModule.directive("componentDirective", ['$rootScope', '$compile', 'pageService', function ($rootScope, $compile, pageService) {
     return {
         restrict: "AE",
-        template: tpl_component_container,
+        //template: tpl_component_container,
         replace: true,
         link: function (scope, element, attrs) {
-            element.css("top", scope.component.top);
-            element.css("left", scope.component.left);
-            element.css("width", scope.component.width);
-            element.css("height", scope.component.height);
-            element.css("z-index", scope.component.zIndex);
-            element.css("opacity", scope.component.opacity / 100);
-            element.css("transform", "rotate(" + scope.component.rotate + "deg)");
-            element.css("display", "block");
+            var $component, $container = $(tpl_com_container);
+            switch(scope.component.type){
+                case "singleimage": $component = $compile(constants.templates.comSingleimage)(scope); break;
+                case "singletext": $component = $compile(constants.templates.comSingletext)(scope); break;
+                case "externallinks": $component = $compile(constants.templates.comExternallinks)(scope); break;
+            }
 
-            $("div.c-" + scope.component.type ,element).css("background-color", scope.component.backgroundColor);
-            $("div.c-" + scope.component.type ,element).css("background-image", scope.component.backgroundImage);
-            $("div.c-" + scope.component.type ,element).css("border-width", scope.component.borderWidth);
-            $("div.c-" + scope.component.type ,element).css("border-color", scope.component.borderColor);
-            $("div.c-" + scope.component.type ,element).css("border-radius", scope.component.borderRadius);
+            $container.prepend($component);
+            element.replaceWith($container);
+
+            $container.css("top", scope.component.top);
+            $container.css("left", scope.component.left);
+            $container.css("width", scope.component.width);
+            $container.css("height", scope.component.height);
+            $container.css("z-index", scope.component.zIndex);
+            $container.css("opacity", scope.component.opacity / 100);
+            $container.css("transform", "rotate(" + scope.component.rotate + "deg)");
+            $container.css("display", "block");
+
+            $("div.c-" + scope.component.type ,$container).css("background-color", scope.component.backgroundColor);
+            $("div.c-" + scope.component.type ,$container).css("background-image", scope.component.backgroundImage);
+            $("div.c-" + scope.component.type ,$container).css("border-width", scope.component.borderWidth);
+            $("div.c-" + scope.component.type ,$container).css("border-color", scope.component.borderColor);
+            $("div.c-" + scope.component.type ,$container).css("border-radius", scope.component.borderRadius);
 
             if(attrs.preview === '1') return;
             var scale = Math.round($rootScope.editorWidth) / 640;
 
-            element.css("top", scope.component.top * scale);
-            element.css("left", scope.component.left * scale);
-            element.css("width", scope.component.width * scale);
-            element.css("height", scope.component.height * scale);
-            element.css("z-index", scope.component.zIndex);
-            element.css("opacity",  scope.component.opacity / 100);
-            element.css("transform", "rotate(" + scope.component.rotate + "deg)");
-            element.css("display", "block");
-            element.css("cursor", "move");
+            $container.css("top", scope.component.top * scale);
+            $container.css("left", scope.component.left * scale);
+            $container.css("width", scope.component.width * scale);
+            $container.css("height", scope.component.height * scale);
+            $container.css("z-index", scope.component.zIndex);
+            $container.css("opacity",  scope.component.opacity / 100);
+            $container.css("transform", "rotate(" + scope.component.rotate + "deg)");
+            $container.css("display", "block");
+            $container.css("cursor", "move");
 
             scope.$watch('currentComponent.rotate', function(newValue, oldValue) {  //console.log(newValue, oldValue);
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                element.css("transform", "rotate(" + (scope.component.rotate || 0) + "deg)");
+                $container.css("transform", "rotate(" + (scope.component.rotate || 0) + "deg)");
             }); 
 
             scope.$watch('currentComponent.opacity', function(newValue, oldValue) {  
-                if(attrs.preview === '1' || scope.currentComponent == null) return; //console.log(element);
-                element.css("opacity", (scope.component.opacity|| 0) / 100);
+                if(attrs.preview === '1' || scope.currentComponent == null) return; //console.log($container);
+                $container.css("opacity", (scope.component.opacity|| 0) / 100);
             }); 
 
-            //console.log($("div.c-" + scope.component.type ,element));
-            //$("div.c-" + scope.component.type ,element).css("top", scope.component.top * scale);
-            //$("div.c-" + scope.component.type ,element).css("left", scope.component.left * scale);
-            //$("div.c-" + scope.component.type ,element).css("width", scope.component.width * scale);
-            //$("div.c-" + scope.component.type ,element).css("height", scope.component.height * scale);
-            $("div.c-" + scope.component.type ,element).css("background-color", scope.component.backgroundColor);
-            $("div.c-" + scope.component.type ,element).css("background-image", scope.component.backgroundImage);
-            $("div.c-" + scope.component.type ,element).css("border-width", scope.component.borderWidth);
-            $("div.c-" + scope.component.type ,element).css("border-color", scope.component.borderColor);
-            $("div.c-" + scope.component.type ,element).css("border-radius", scope.component.borderRadius);
-            //$("div.c-" + scope.component.type ,element).css("z-index", scope.component.zIndex);
-            //$("div.c-" + scope.component.type ,element).css("opacity", scope.component.opacity / 100);
-            //$("div.c-" + scope.component.type ,element).css("transform", "rotate(" + scope.component.rotate + "deg)");
-            $("div.c-" + scope.component.type ,element).css("display", "block");
+            //console.log($("div.c-" + scope.component.type ,$container));
+            //$("div.c-" + scope.component.type ,$container).css("top", scope.component.top * scale);
+            //$("div.c-" + scope.component.type ,$container).css("left", scope.component.left * scale);
+            //$("div.c-" + scope.component.type ,$container).css("width", scope.component.width * scale);
+            //$("div.c-" + scope.component.type ,$container).css("height", scope.component.height * scale);
+            $("div.c-" + scope.component.type ,$container).css("background-color", scope.component.backgroundColor);
+            $("div.c-" + scope.component.type ,$container).css("background-image", scope.component.backgroundImage);
+            $("div.c-" + scope.component.type ,$container).css("border-width", scope.component.borderWidth);
+            $("div.c-" + scope.component.type ,$container).css("border-color", scope.component.borderColor);
+            $("div.c-" + scope.component.type ,$container).css("border-radius", scope.component.borderRadius);
+            //$("div.c-" + scope.component.type ,$container).css("z-index", scope.component.zIndex);
+            //$("div.c-" + scope.component.type ,$container).css("opacity", scope.component.opacity / 100);
+            //$("div.c-" + scope.component.type ,$container).css("transform", "rotate(" + scope.component.rotate + "deg)");
+            $("div.c-" + scope.component.type ,$container).css("display", "block");
             //border-color border-width
             scope.$watch('currentComponent.top', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                element.css("top", scope.component.top * scale);
+                $container.css("top", scope.component.top * scale);
             }); 
 
             scope.$watch('currentComponent.left', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                element.css("left", scope.component.left * scale);
+                $container.css("left", scope.component.left * scale);
             }); 
 
             scope.$watch('currentComponent.width', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                element.css("width", scope.component.width * scale);
+                $container.css("width", scope.component.width * scale);
             }); 
 
             scope.$watch('currentComponent.height', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                element.css("height", scope.component.height * scale);
+                $container.css("height", scope.component.height * scale);
             }); 
             //
             scope.$watch('currentComponent.backgroundColor', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                $("div.c-" + scope.component.type ,element).css("background-color", scope.component.backgroundColor);
+                $("div.c-" + scope.component.type ,$container).css("background-color", scope.component.backgroundColor);
             }); 
 
             scope.$watch('currentComponent.backgroundImage', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                $("div.c-" + scope.component.type ,element).css("background-image", scope.component.backgroundImage);
+                $("div.c-" + scope.component.type ,$container).css("background-image", scope.component.backgroundImage);
             }); 
 
             scope.$watch('currentComponent.borderWidth', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                $("div.c-" + scope.component.type ,element).css("border-width", scope.component.borderWidth);
+                $("div.c-" + scope.component.type ,$container).css("border-width", scope.component.borderWidth);
             }); 
 
             scope.$watch('currentComponent.borderColor', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                $("div.c-" + scope.component.type ,element).css("border-color", scope.component.borderColor);
+                $("div.c-" + scope.component.type ,$container).css("border-color", scope.component.borderColor);
             }); 
 
             scope.$watch('currentComponent.borderRadius', function(newValue, oldValue) {  
                 if(attrs.preview === '1' || scope.currentComponent == null) return;
-                $("div.c-" + scope.component.type ,element).css("border-radius", scope.component.borderRadius);
+                $("div.c-" + scope.component.type ,$container).css("border-radius", scope.component.borderRadius);
             }); 
 
             //$(".c-c-container").removeClass("u-comChoose");
-            //element.addClass("u-comChoose");
+            //$container.addClass("u-comChoose");
 
-            var item = interact(element[0], { styleCursor: false })
+            var item = interact($container[0], { styleCursor: false })
             .draggable({
                 restrict: {
                     restriction: "parent",
@@ -308,10 +318,10 @@ mainModule.directive("componentDirective", ['$rootScope', 'pageService', functio
 
             })
             .on('resizeend', function (event) {
-                $(element).css("cursor", "move");
+                $($container).css("cursor", "move");
             })
-            .actionChecker(function (pointer, event, action, interactable, element, interaction) {
-                if (action.name === 'resize' && $(element).hasClass("u-comChoose")) {
+            .actionChecker(function (pointer, event, action, interactable, $container, interaction) {
+                if (action.name === 'resize' && $($container).hasClass("u-comChoose")) {
 
                     var cursorKey = 'resize',
                             edgeNames = ['top', 'bottom', 'left', 'right'];
@@ -323,22 +333,23 @@ mainModule.directive("componentDirective", ['$rootScope', 'pageService', functio
                     }
                     cursor = interact.debug().actionCursors[cursorKey];
 
-                    $(element).css("cursor", cursor);
+                    $($container).css("cursor", cursor);
                 } else {
                     action.name = 'drag';
                 }
 
                 if (action.name === 'drag') {
-                    $(element).css("cursor", "move");
+                    $($container).css("cursor", "move");
                 }
                 return action;
             });
 
-            element.on('click', function (event) {
+            $container.on('click', function (event) {
                 event.stopPropagation()
                 $(".c-c-container").removeClass("u-comChoose");
-                element.addClass("u-comChoose");
-
+                $container.addClass("u-comChoose");
+                //console.log($rootScope);
+                $rootScope.currentComponent = scope.component;
                 scope.$emit('component.choose', scope.component);
                 scope.$emit('component.style.update', scope.component.top, scope.component.left, 
                   scope.component.width, scope.component.height, 
@@ -346,16 +357,16 @@ mainModule.directive("componentDirective", ['$rootScope', 'pageService', functio
                 scope.$apply();
             });
 
-            $(".tr-c,.bl-c", element).on('mouseenter', function () {
-                element.css("cursor", "ne-resize");
+            $(".tr-c,.bl-c", $container).on('mouseenter', function () {
+                $container.css("cursor", "ne-resize");
             }).on('mouseleave', function (e) {
-                element.css("cursor", "move");
+                $container.css("cursor", "move");
             });
 
-            $(".tl-c,.br-c", element).on('mouseenter', function () {
-                element.css("cursor", "nw-resize");
+            $(".tl-c,.br-c", $container).on('mouseenter', function () {
+                $container.css("cursor", "nw-resize");
             }).on('mouseleave', function (e) {
-                element.css("cursor", "move");
+                $container.css("cursor", "move");
             });
         }
     }

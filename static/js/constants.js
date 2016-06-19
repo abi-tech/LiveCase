@@ -60,10 +60,83 @@ var tpl_conf_header = [
         '<span style="color:#444"></span>',
     '</header>'
 ].join('');
+
+var tpl_global_config = [
+    '<div class="g-config g-config-page">',
+        '<section class="c-config">',
+            '<section class="c-config-wapper">',
+            '</section>',
+        '</section>',
+    '</div>'
+].join('');
+
+var tpl_conf_position = [
+    '<section class="c-conf-section c-conf-common">',
+        '<div class="c-conf-row c-conf-row-3">',
+            '<label class="c-input-label" for="left">位置</label>',
+            '<div class="c-input-box">',
+                '<label class="u-label f-mr-9">X轴</label>',
+                '<input type="text" id="left" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.left" />',
+                '<label class="u-label f-mr-9" for="top">Y轴</label>',
+                '<input type="text" id="top" class="u-textbox" size="10" ng-model="currentComponent.top" />',
+            '</div>',
+        '</div>',
+        '<div class="c-conf-row">',
+            '<label class="c-input-label" for="width">大小</label>',
+            '<div class="c-input-box">',
+                '<label class="u-label f-mr-9">宽</label>',
+                '<input type="text" id="width" class="u-textbox f-mr-40" size="10" ng-model="currentComponent.width" />',
+                '<label class="u-label f-mr-9">高</label>',
+                '<input type="text" id="height" class="u-textbox" size="10" ng-model="currentComponent.height" />',
+            '</div>',
+        '</div>',
+    '</section>'
+].join(''); 
+
+var tpl_com_container = [
+'<div class="f-abs c-c-container" ng-click="setCurrentComponent(component)" ng-attr-data-id="{{component.id}}">',
+    '<div class="tl-c"></div><div class="tr-c"></div><div class="bl-c"></div><div class="br-c"></div>',
+'</div>'
+].join('');
+
+var tpl_com_singleimage = [
+'<div>',
+    '<div class="c-singleimage preview-container" ng-style="component.containerStyle">',
+        '<img class="jcrop-preview newImg" ng-src="{{ component.url }}" ng-style="component.imageStyle" />',
+    '</div>',
+'</div>'
+].join('');
+
+var tpl_com_singletext = [
+'<div class="c-single-text">',
+    '<div class="text-wrap" inside-styles="" ng-style="component.containerStyle">',
+        '<div class="text-content" ng-style="component.textStyle">{{ component.text || \'右侧输入文本\' }}</div>',
+    '</div>',
+'</div>'
+].join('');
+
+var tpl_com_externallinks = [
+'<div>',
+    '<div class="c-externallinks content" inside-styles="">',
+        '<a class="f-fix link" href="javascript:;" address="" phone="">',
+            '<div class="btn-txt" ng-style="component.style">',
+                '<div class="btn-info">{{component.text}}</div>',
+            '</div>',
+        '</a>',
+    '</div>',
+'</div>'
+].join('');
+
 var header = { "name": "按钮-链接", "url": "/static/images/externallinks.png?v=1" };
 var constants = {
     templates: {
-        confHeader: tpl_conf_header
+        globalConfig: tpl_global_config,
+        confHeader: tpl_conf_header,
+        confPosition: tpl_conf_position,
+        comContainer: tpl_com_container,
+        comSingleimage: tpl_com_singleimage,
+        comSingletext: tpl_com_singletext,
+        comExternallinks: tpl_com_externallinks,
     },
 	animationType: {
 		"bounceIn": "弹入",
@@ -199,23 +272,32 @@ var constants = {
     ]},{ "name": "无限循环", "inputs": [
         { "inputHtml": '<div ng-model="currentComponent.animOut.infinite" ipr-switcher></div>' }
     ]}],
+    confFacade: {
+        classList: ["u-tab", "z-singleLine"],
+        activeClass: "z-active",
+        wrapper: '<section class="c-conf-section c-conf-tabSection"></section>',
+        tabList: [
+            { "name": "样式", "directive": "<div config-component-style-panel-directive></div>", "active": true },
+            { "name": "动画", "directive": "<div config-component-animation-panel-directive></div>", "active": false }
+        ]
+    },
     confPage: [
         '',
     ],
     confSingleImage: [
-        '<div conf-header></div>',
+        '<div ng-model="currentComponent" conf-header></div>',
         '<div conf-singleimage></div>',
         '<div conf-facade></div>',
         '<div conf-position></div>',
     ],
     confSingleText: [
-        '<div conf-header></div>',
+        '<div ng-model="currentComponent" conf-header></div>',
         '<div conf-singletext></div>',
         '<div conf-facade></div>',
         '<div conf-position></div>',
     ],
     confExternalLinks: [
-        '<div conf-header></div>',
+        '<div ng-model="currentComponent" conf-header></div>',
         '<div conf-externallinks></div>',
         '<div conf-facade></div>',
         '<div conf-position></div>',

@@ -10,29 +10,20 @@ var data_ui_tab_anim = {
 }
 
 //<div tab-options="data_ui_tab_facade" ui-tab></div>
-var data_ui_tab_facade = {
-    classList: ["u-tab", "z-singleLine"],
-    activeClass: "z-active",
-    wrapper: '<section class="c-conf-section c-conf-tabSection"></section>',
-    tabList: [
-        { "name": "样式", "directive": "<div config-component-style-panel-directive></div>", "active": true },
-        { "name": "动画", "directive": "<div config-component-animation-panel-directive></div>", "active": false }
-    ]
-}
+//var data_ui_tab_facade = 
 
 mainModule.directive('uiTab',["$rootScope", "$compile", function ($rootScope, $compile) {
     return {
-        restrict: 'A', 
-        scope: false,
+        restrict: 'A',
         link: function(scope, element, attrs){ 
-            var options = eval(attrs.tabOptions);
+            var options = eval(attrs.tabOptions) || scope.tabOptions;
             var activeClass = options.activeClass;
             var $wrapper = $(options.wrapper);
             var $ul = $("<ul></ul>");
             var panels = [];
             //添加DOM 替换DOM结构
             $wrapper.append($ul);
-            element.replaceWith($wrapper);
+            element.append($wrapper);
 
             //Tab添加样式
             angular.forEach(options.classList, function(data, index, array){
@@ -390,6 +381,21 @@ mainModule.directive('animationPicker', function ($compile) {
                 $fmt4.hide();
                 $fmt8.show();
                 element.append(ctx);
+
+                ctx.find("div.anime-in").on("mouseenter", function (e) {
+                    console.log('mouseenter');
+                    //animation: fadeInDown 0.8s backwards
+                    //$(this).css
+                    if ($(this).css) {
+
+                    }
+                    $(this).css("animation", "fadeInDown 0.8s backwards").one(function () {
+                        $(this).css("animation", "none");alert(1);
+                    });
+                }).on("mouseleave", function (e) {
+                    console.log('mouseleave');
+                    //$(this).css("animation", "none");
+                });
             }
 
             $row.append($dialog);

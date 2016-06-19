@@ -1,7 +1,7 @@
 ; (function ($, window, document, undefined) {
 
 	var data_colorpicker = { colors : [
-		{ "color": "#FFFFFF", "src": "static/images/colorpicker_colornone.png" },
+		{ "color": "none", "src": "static/images/colorpicker_colornone.png" },
 		{ "color": "#FFFFFF" },
 		{ "color": "#E5E5E5" },
 		{ "color": "#CCCCCC" },
@@ -71,10 +71,10 @@
 			'</div>',
 			'{{ /each }}',
 			'<hr>',
-			'<div class="switch">',
-				'<div class="title">更多颜色</div>',
-				'<div class="u-iphone-switch switch-bg">',
-					'<div class="switch-btn"></div>',
+			'<div class="switch" style="margin: 0;">',
+				'<div class="title" style="padding: 0;">更多颜色</div>',
+				'<div class="u-iphone-switch switch-bg" style="padding: 1px; margin-top:-4px; color:#fff;">',
+					'<div class="switch-btn" style="color:#fff;border: 1px solid;"></div>',
 				'</div>',
 			'</div>',
 		'</div>',

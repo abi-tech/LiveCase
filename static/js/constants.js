@@ -37,6 +37,7 @@ var tpl_anim_in = [
         '<div panel-option="constants.confAnimIn[0]" confing-row></div>',
         '<div panel-option="constants.confAnimIn[1]" confing-row></div>',
         '<div panel-option="constants.confAnimIn[2]" confing-row></div>',
+        '<div panel-option="constants.confAnimIn[3]" confing-row></div>',
     '</div>',
 ].join('');
 
@@ -49,6 +50,7 @@ var tpl_anim_out = [
         '<div panel-option="constants.confAnimOut[0]" confing-row></div>',
         '<div panel-option="constants.confAnimOut[1]" confing-row></div>',
         '<div panel-option="constants.confAnimOut[2]" confing-row></div>',
+        '<div panel-option="constants.confAnimOut[3]" confing-row></div>',
     '</div>',
 ].join('');
 
@@ -67,53 +69,56 @@ var constants = {
 		"hinge": "坠落"
 	},
 	animations: [
-		{ "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceIn", "typeName": "弹入", "name": "从上弹入", "effect": "bounceInDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceIn", "typeName": "弹入", "name": "从下弹入", "effect": "bounceInUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceIn", "typeName": "弹入", "name": "从左弹入", "effect": "bounceInLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceIn", "typeName": "弹入", "name": "从右弹入", "effect": "bounceInRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeIn", "typeName": "淡入", "name": "淡入", "effect": "fadeIn", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeIn", "typeName": "淡入", "name": "从上淡入", "effect": "fadeInDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeIn", "typeName": "淡入", "name": "从下淡入", "effect": "fadeInUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeIn", "typeName": "淡入", "name": "从左淡入", "effect": "fadeInLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeIn", "typeName": "淡入", "name": "从右淡入", "effect": "fadeInRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"flipIn", "typeName": "翻入", "name": "水平翻入", "effect": "flipInY", "delay": 0, "duration": 1, "count": 1 },
-	    { "type":"flipIn", "typeName": "翻入", "name": "垂直翻入", "effect": "flipInX", "delay": 0, "duration": 1, "count": 1 },
-	    { "type":"rotateIn", "typeName": "旋入", "name": "旋入", "effect": "rotateIn", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateIn", "typeName": "旋入", "name": "从上旋入", "effect": "rotateInDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateIn", "typeName": "旋入", "name": "从下旋入", "effect": "rotateInUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateIn", "typeName": "旋入", "name": "从左旋入", "effect": "rotateInLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateIn", "typeName": "旋入", "name": "从右旋入", "effect": "rotateInRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomIn", "typeName": "渐进放大", "name": "渐进放大", "effect": "zoomIn", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomIn", "typeName": "渐进放大", "name": "从上放大", "effect": "zoomInDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomIn", "typeName": "渐进放大", "name": "从下放大", "effect": "zoomInUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomIn", "typeName": "渐进放大", "name": "从左放大", "effect": "zoomInLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomIn", "typeName": "渐进放大", "name": "从右放大", "effect": "zoomInRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceOut", "typeName": "弹出", "name": "弹出", "effect": "bounceOut", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceOut", "typeName": "弹出", "name": "从上弹出", "effect": "bounceOutDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceOut", "typeName": "弹出", "name": "从下弹出", "effect": "bounceOutUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceOut", "typeName": "弹出", "name": "从左弹出", "effect": "bounceOutLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"bounceOut", "typeName": "弹出", "name": "从右弹出", "effect": "bounceOutRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeOut", "typeName": "淡出", "name": "淡出", "effect": "fadeOut", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeOut", "typeName": "淡出", "name": "从上淡出", "effect": "fadeOutDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeOut", "typeName": "淡出", "name": "从下淡出", "effect": "fadeOutUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeOut", "typeName": "淡出", "name": "从左淡出", "effect": "fadeOutLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"fadeOut", "typeName": "淡出", "name": "从右淡出", "effect": "fadeOutRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"flipOut", "typeName": "翻出", "name": "水平翻出", "effect": "flipOutY", "delay": 0, "duration": 1, "count": 1 },
-	    { "type":"flipOut", "typeName": "翻出", "name": "垂直翻出", "effect": "flipOutX", "delay": 0, "duration": 1, "count": 1 },
-	    { "type":"rotateOut", "typeName": "旋出", "name": "旋出", "effect": "rotateOut", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateOut", "typeName": "旋出", "name": "从上旋出", "effect": "rotateOutDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateOut", "typeName": "旋出", "name": "从下旋出", "effect": "rotateOutUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateOut", "typeName": "旋出", "name": "从左旋出", "effect": "rotateOutLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"rotateOut", "typeName": "旋出", "name": "从右旋出", "effect": "rotateOutRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomOut", "typeName": "渐进缩小", "name": "渐进缩小", "effect": "zoomOut", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从上缩小", "effect": "zoomOutDown", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从下缩小", "effect": "zoomOutUp", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从左缩小", "effect": "zoomOutLeft", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从右缩小", "effect": "zoomOutRight", "delay": 0, "duration": 1, "count": 1 },
-        { "type":"hinge", "typeName": "坠落", "name": "坠落", "effect": "hinge", "delay": 0, "duration": 1, "count": 1 },
+		{ "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceIn", "typeName": "弹入", "name": "从上弹入", "effect": "bounceInDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceIn", "typeName": "弹入", "name": "从下弹入", "effect": "bounceInUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceIn", "typeName": "弹入", "name": "从左弹入", "effect": "bounceInLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceIn", "typeName": "弹入", "name": "从右弹入", "effect": "bounceInRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeIn", "typeName": "淡入", "name": "淡入", "effect": "fadeIn", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeIn", "typeName": "淡入", "name": "从上淡入", "effect": "fadeInDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeIn", "typeName": "淡入", "name": "从下淡入", "effect": "fadeInUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeIn", "typeName": "淡入", "name": "从左淡入", "effect": "fadeInLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeIn", "typeName": "淡入", "name": "从右淡入", "effect": "fadeInRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"flipIn", "typeName": "翻入", "name": "水平翻入", "effect": "flipInY", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+	    { "type":"flipIn", "typeName": "翻入", "name": "垂直翻入", "effect": "flipInX", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+	    { "type":"rotateIn", "typeName": "旋入", "name": "旋入", "effect": "rotateIn", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateIn", "typeName": "旋入", "name": "从上旋入", "effect": "rotateInDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateIn", "typeName": "旋入", "name": "从下旋入", "effect": "rotateInUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateIn", "typeName": "旋入", "name": "从左旋入", "effect": "rotateInLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateIn", "typeName": "旋入", "name": "从右旋入", "effect": "rotateInRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomIn", "typeName": "渐进放大", "name": "渐进放大", "effect": "zoomIn", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomIn", "typeName": "渐进放大", "name": "从上放大", "effect": "zoomInDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomIn", "typeName": "渐进放大", "name": "从下放大", "effect": "zoomInUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomIn", "typeName": "渐进放大", "name": "从左放大", "effect": "zoomInLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomIn", "typeName": "渐进放大", "name": "从右放大", "effect": "zoomInRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceOut", "typeName": "弹出", "name": "弹出", "effect": "bounceOut", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceOut", "typeName": "弹出", "name": "从上弹出", "effect": "bounceOutDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceOut", "typeName": "弹出", "name": "从下弹出", "effect": "bounceOutUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceOut", "typeName": "弹出", "name": "从左弹出", "effect": "bounceOutLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"bounceOut", "typeName": "弹出", "name": "从右弹出", "effect": "bounceOutRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeOut", "typeName": "淡出", "name": "淡出", "effect": "fadeOut", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeOut", "typeName": "淡出", "name": "从上淡出", "effect": "fadeOutDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeOut", "typeName": "淡出", "name": "从下淡出", "effect": "fadeOutUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeOut", "typeName": "淡出", "name": "从左淡出", "effect": "fadeOutLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"fadeOut", "typeName": "淡出", "name": "从右淡出", "effect": "fadeOutRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"flipOut", "typeName": "翻出", "name": "水平翻出", "effect": "flipOutY", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+	    { "type":"flipOut", "typeName": "翻出", "name": "垂直翻出", "effect": "flipOutX", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+	    { "type":"rotateOut", "typeName": "旋出", "name": "旋出", "effect": "rotateOut", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateOut", "typeName": "旋出", "name": "从上旋出", "effect": "rotateOutDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateOut", "typeName": "旋出", "name": "从下旋出", "effect": "rotateOutUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateOut", "typeName": "旋出", "name": "从左旋出", "effect": "rotateOutLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"rotateOut", "typeName": "旋出", "name": "从右旋出", "effect": "rotateOutRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomOut", "typeName": "渐进缩小", "name": "渐进缩小", "effect": "zoomOut", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从上缩小", "effect": "zoomOutDown", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从下缩小", "effect": "zoomOutUp", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从左缩小", "effect": "zoomOutLeft", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"zoomOut", "typeName": "渐进缩小", "name": "从右缩小", "effect": "zoomOutRight", "delay": 0, "duration": 1, "count": 1,"infinite":false },
+        { "type":"hinge", "typeName": "坠落", "name": "坠落", "effect": "hinge", "delay": 0, "duration": 1, "count": 1,"infinite":false },
 	],
-	configStyleAndAnim: {
+	directives:[
+		'<div tab-options="data_ui_tab_facade" ui-tab></div>'
+	],
+	confStyleAndAnim: {
 	    classList: ["u-tab", "z-singleLine"],
 	    activeClass: "z-active",
 	    wrapper: '<section class="c-conf-section c-conf-tabSection"></section>',
@@ -172,6 +177,8 @@ var constants = {
         { "inputHtml": '<div ng-model="currentComponent.animIn.duration" slider-min="0" slider-max="5" slider-step="0.01" inputbox-slider></div>' }
     ]},{ "name": "执行次数", "inputs": [
         { "inputHtml": '<div ng-model="currentComponent.animIn.count" slider-min="1" slider-max="10" inputbox-slider></div>' }
+    ]},{ "name": "无限循环", "inputs": [
+        { "inputHtml": '<div ng-model="currentComponent.animIn.infinite" ipr-switcher></div>' }
     ]}],
     confAnimOut: [{ "name": "开始时间", "inputs": [
         { "inputHtml": '<div ng-model="currentComponent.animOut.delay" slider-min="0" slider-max="300" slider-step="0.01" inputbox-slider></div>' }
@@ -179,5 +186,7 @@ var constants = {
         { "inputHtml": '<div ng-model="currentComponent.animOut.duration" slider-min="0" slider-max="5" slider-step="0.01" inputbox-slider></div>' }
     ]},{ "name": "执行次数", "inputs": [
         { "inputHtml": '<div ng-model="currentComponent.animOut.count" slider-min="1" slider-max="10" inputbox-slider></div>' }
+    ]},{ "name": "无限循环", "inputs": [
+        { "inputHtml": '<div ng-model="currentComponent.animOut.infinite" ipr-switcher></div>' }
     ]}]
 };

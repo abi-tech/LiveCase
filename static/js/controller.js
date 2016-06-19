@@ -45,6 +45,8 @@ mainModule.controller('navigationController',['$scope', '$http', function ($scop
 
 mainModule.controller('configController',['$scope', '$http', 'pageService', function ($scope, $http, pageService) {  
 
+    $scope.json = pageService.pages;
+
     $scope.setBackgroundColor = function(color){
         $scope.currentPage.style["background-color"] = color;
     }
@@ -141,3 +143,7 @@ mainModule.controller('previewController',['$scope', '$http', 'pageService', fun
 mainModule.controller('globalAudioController',['$scope', '$http', function ($scope, $http) {  
 
 }]);  
+
+mainModule.controller('showJsonController',['$scope', '$http', 'pageService', function ($scope, $http, pageService) {  
+
+}]);

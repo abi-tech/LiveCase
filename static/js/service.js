@@ -42,8 +42,8 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 opacity: 100,
                 style: { color: "#FFFFFF", fontSize: "1.625em", textAlign: "center", fontFamily: "", fontWeight: "", fontStyle: "", textDecoration: "" },
                 display: "text",
-                animIn: { "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1 },
-                animOut: null
+                animIn: { "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1, "infinite": true },
+                animOut: { "type":"fadeOut", "typeName": "淡出", "name": "从右淡出", "effect": "fadeOutRight", "delay": 0, "duration": 1, "count": 1, "infinite": true }
             }]
         }],
 

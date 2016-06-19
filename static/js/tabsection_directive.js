@@ -330,8 +330,8 @@ mainModule.directive('animationPicker', function ($compile) {
             var $row = element.find(".c-conf-row-2");
             var $icon = $row.find(".link-chooseAnime>.u-image-wrap>.u-image-large");
 
-            ngModelController.$render = function() {
-                var viewValue = ngModelController.$viewValue; console.log(scope, ngModelController);
+            ngModelController.$render = function() { 
+                var viewValue = ngModelController.$viewValue;
                 if(viewValue){
                     $fmt4.hide();
                     $dialog.hide();
@@ -345,7 +345,7 @@ mainModule.directive('animationPicker', function ($compile) {
                     var animations = $.map(constants.animations, function (n) {
                         if (n.type == viewValue.type) return n;
                     });
-                    updateModel(animations[0]);
+                    updateModel(viewValue);
                     initConfAnim(animations);
                 }else{
                     $label4.text(options.noneInfo);
@@ -362,13 +362,19 @@ mainModule.directive('animationPicker', function ($compile) {
 
             function updateModel(animation) {
                 for (var key in animation) {
-                    ngModelController.$viewValue[key] = animation[key];
+                    if(key != 'type')
+                        ngModelController.$viewValue[key] = animation[key];
                 }
-                //scope.$parent.$apply();
             }
 
-            scope.$watch(options.watch, function (newValue, oldValue) {
-                ngModelController.$render();
+            scope.$watch(options.watch, function (newValue, oldValue) { 
+                if(newValue != oldValue){
+                    var animations = $.map(constants.animations, function (n) {
+                        if (n.type == newValue) return n;
+                    });
+                    updateModel(animations[0]);
+                    ngModelController.$render();
+                }
             });
 
             function initConfAnim(animations) {

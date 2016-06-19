@@ -6,6 +6,14 @@ mainModule.directive('navDirective', function () {
     };
 });
 
+mainModule.directive('dialogFile', function () {
+    return {
+        restrict : 'AE',
+        replace : true,
+        //templateUrl : 'tpls/dialog_file.html'
+    };
+});
+
 mainModule.directive('configDirective', function () {
     return {
         restrict : 'AE',

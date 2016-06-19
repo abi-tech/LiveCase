@@ -54,7 +54,17 @@ var tpl_anim_out = [
     '</div>',
 ].join('');
 
+var tpl_conf_header = [
+    '<header class="c-conf-header">',
+        '<div class="c-compnent-icon"></div>',
+        '<span style="color:#444"></span>',
+    '</header>'
+].join('');
+var header = { "name": "按钮-链接", "url": "/static/images/externallinks.png?v=1" };
 var constants = {
+    templates: {
+        confHeader: tpl_conf_header
+    },
 	animationType: {
 		"bounceIn": "弹入",
 		"fadeIn": "淡入",
@@ -188,5 +198,26 @@ var constants = {
         { "inputHtml": '<div ng-model="currentComponent.animOut.count" slider-min="1" slider-max="10" inputbox-slider></div>' }
     ]},{ "name": "无限循环", "inputs": [
         { "inputHtml": '<div ng-model="currentComponent.animOut.infinite" ipr-switcher></div>' }
-    ]}]
+    ]}],
+    confPage: [
+        '',
+    ],
+    confSingleImage: [
+        '<div conf-header></div>',
+        '<div conf-singleimage></div>',
+        '<div conf-facade></div>',
+        '<div conf-position></div>',
+    ],
+    confSingleText: [
+        '<div conf-header></div>',
+        '<div conf-singletext></div>',
+        '<div conf-facade></div>',
+        '<div conf-position></div>',
+    ],
+    confExternalLinks: [
+        '<div conf-header></div>',
+        '<div conf-externallinks></div>',
+        '<div conf-facade></div>',
+        '<div conf-position></div>',
+    ]
 };

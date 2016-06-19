@@ -253,3 +253,61 @@ mainModule.directive('configComponentPositionDirective', function () {
         template: tpl_config_component_position,
     };
 });
+
+
+
+
+
+
+mainModule.directive('confHeader', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        template: constants.templates["confHeader"],
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;
+            var $icon = element.find(".c-compnent-icon");
+            var $span = element.find("span");
+            $icon.css("background-image", "url('" + options.url + "')");
+            $span.text(options.name);
+        }
+    };
+});
+
+mainModule.directive('confExternallinks', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        //template: constants.templates["confHeader"],
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;
+
+        }
+    };
+});
+
+mainModule.directive('confFacade', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        //template: constants.templates["confHeader"],
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;
+
+        }
+    };
+});
+
+mainModule.directive('confPosition', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        //template: constants.templates["confHeader"],
+        link: function (scope, element, attrs) {
+            var options = eval(attrs.options) || scope.options;
+
+        }
+    };
+});
+
+

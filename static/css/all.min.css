@@ -3047,12 +3047,12 @@ body,html {
 /*.g-config.g-config-page .c-config .c-conf-section .c-input-label {
 	color:#999
 }*/
-.g-config.g-config-page .c-config .c-conf-section .u-image-wrap {
+/*.g-config.g-config-page .c-config .c-conf-section .u-image-wrap {
 	background:#fff;
 	position:relative;
 	padding:0;
 	border:none
-}
+}*/
 /*.g-config.g-config-page .c-config .c-conf-section .u-image-wrap:hover {
 	background:#444
 }*/
@@ -12042,4 +12042,3 @@ i.icon-music {
 .g-config.g-config-page .c-config .c-conf-section .u-image-wrap:hover {
     background: #E6E6E6;
 }
-

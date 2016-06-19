@@ -144,6 +144,6 @@ mainModule.controller('globalAudioController',['$scope', '$http', function ($sco
 
 }]);  
 
-mainModule.controller('showJsonController',['$scope', '$http', 'pageService', function ($scope, $http, pageService) {  
+mainModule.controller('filePickerController',['$scope', '$http', 'pageService', function ($scope, $http, pageService) {  
 
 }]);

@@ -1,7 +1,7 @@
 <div class="g-config g-config-page" ng-controller="configController">
     <section class="c-config">
         <section class="c-config-wapper" ng-class="(currentComponent == null? 'none': '')">
-
+            <!-- <div options="header" conf-header></div> -->
             <div ng-if="(currentPage != null && currentComponent == null)" config-page-header-directive></div>
             <div ng-if="(currentPage != null && currentComponent == null)" config-page-background-directive></div>
             <div ng-if="(currentPage != null && currentComponent == null)" config-page-section-directive></div>

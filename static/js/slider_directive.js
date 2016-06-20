@@ -67,22 +67,3 @@ mainModule.directive('inputboxSlider', function() {
         }
     };
 });
-
-
-
-
-var tpl_confing_section = [
-].join('');
-
-mainModule.directive('confingSection', function() {
-    return {
-        restrict: 'AE',
-        require: 'ngModel',
-        scope: {},
-        compile: function(element, attrs){ 
-        	return function(scope, element, attrs, controller){
-        		
-        	}
-        }
-    };
-});

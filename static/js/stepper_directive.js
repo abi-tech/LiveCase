@@ -1,7 +1,3 @@
-mainModule.controller('DemoController', function($scope) {
-    $scope.rating = 5;      
-})
-
 var tpl_stepper = [
     '<div class="u-spinner">',
         '<div class="oni-spinner oni-widget">',

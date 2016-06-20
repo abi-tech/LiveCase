@@ -24,7 +24,6 @@ mainModule.directive('configDirective', function () {
                 if(scope.currentComponent == null){ 
                     
                     
-
                     $("#page_backgroundColor").spectrum({
                         preferredFormat: "hex",
                         showInput: true,
@@ -144,13 +143,18 @@ mainModule.directive("componentDirective", ['$rootScope', '$compile', 'pageServi
         //template: tpl_component_container,
         replace: true,
         link: function (scope, element, attrs) {
+            var scale = Math.round($rootScope.editorWidth) / 640;
+            $rootScope.scale = scale;
             var $component, $container = $(tpl_com_container);
             switch(scope.component.type){
-                case "singleimage": $component = $compile(constants.templates.comSingleimage)(scope); break;
+                case "singleimage": 
+                    $component = $compile(constants.templates.comSingleimage)(scope); 
+                    scope.component.imageStyle["transform"] = "scale(" + scale + ")"; //alert(scale);
+                    break;
                 case "singletext": $component = $compile(constants.templates.comSingletext)(scope); break;
                 case "externallinks": $component = $compile(constants.templates.comExternallinks)(scope); break;
             }
-
+            $container.attr("data-id", scope.component.id);
             $container.prepend($component);
             element.replaceWith($container);
 
@@ -170,7 +174,6 @@ mainModule.directive("componentDirective", ['$rootScope', '$compile', 'pageServi
             $("div.c-" + scope.component.type ,$container).css("border-radius", scope.component.borderRadius);
 
             if(attrs.preview === '1') return;
-            var scale = Math.round($rootScope.editorWidth) / 640;
 
             $container.css("top", scope.component.top * scale);
             $container.css("left", scope.component.left * scale);
@@ -377,37 +380,19 @@ mainModule.directive("componentDirective", ['$rootScope', '$compile', 'pageServi
 //animation_panel end
 
 //config_section start
-var tpl_config_section_cropper = [
-    '<section class="c-conf-section z-expand" style="display: block;">',
-        '<section class="c-conf-panel">',
-            '<div class="jcrop-panel-header" style="overflow: hidden">更换图片</div>',
-            '<div class="jcrop-panel">',
-                '<div class="jcrop-wrap">',
-                    '<img id="image" src="static/images/heihei.png">',
-                '</div>',
-            '</div>',
-            '<div class="jcrop-setUp">',
-                '<ul>',
-                    '<li data-value="0" class="curr"> 自由</li>',
-                    '<li data-value="1"> 正方形</li>',
-                    '<li data-value="2"> 4:3</li>',
-                    '<li data-value="3"> 16:9</li>',
-                    '<li data-value="4"> 铺满</li>',
-                '</ul>',
-            '</div>',
-        '</section>',
-    '</section>'
-].join('');
 
-
-mainModule.directive("sectionCropperDirective", ['$rootScope', function ($rootScope) {
+mainModule.directive("sectionCropperDirective", function () {
     return {
-        restrict: "AE",
+        restrict: "A",
         template: tpl_config_section_cropper,
         replace: true,
-        transclude: true,
         link: function (scope, element, attrs) {
             var $image = $('.jcrop-wrap>img', element);
+
+            // ngModelController.$render = function () {
+            //     var viewValue = ngModelController.$viewValue;
+            // }
+            $image.attr("src", scope.currentComponent.url);
 
             function initCropperBox() {
                 var ratio = 0.2;
@@ -422,8 +407,10 @@ mainModule.directive("sectionCropperDirective", ['$rootScope', function ($rootSc
             var options = {
                 viewMode: 2,
                 //dragMode: 'none',
+                //preview: '.preview-container',
                 aspectRatio: 'NaN',
                 modal: false,
+                checkCrossOrigin: false,
                 //preview: '.img-preview',
                 //background: false,
                 autoCrop: false,
@@ -456,9 +443,30 @@ mainModule.directive("sectionCropperDirective", ['$rootScope', function ($rootSc
                 $image.cropper('setAspectRatio', options.aspectRatio);
                 
             });
+
+            $image.on('cropend.cropper', function (e) {
+                console.log(e); // cropstart
+                console.log(e.namespace); // cropper
+                console.log(e.action); // ...
+                console.log(e.originalEvent.pageX);
+
+                // Prevent to start cropping, moving, etc if necessary
+                if (e.action === 'crop') {
+                    e.preventDefault();
+                }
+            });
+            $image.on('crop.cropper', function (e) {
+                console.log(e);
+
+                scope.currentComponent.imageStyle["margin-top"] = -e.y * scope.scale;
+                scope.currentComponent.imageStyle["margin-left"] = -e.x * scope.scale;
+                scope.currentComponent.width = e.width;
+                scope.currentComponent.height = e.height;
+                scope.$apply();
+            });
         }
     }
-}]);
+});
 //config_section end
 
 //config_background

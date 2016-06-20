@@ -60,9 +60,9 @@ var tpl_conf_header = [
         '<span style="color:#444"></span>',
     '</header>'
 ].join('');
-
+//configPageBackgroundDirective
 var tpl_global_config = [
-    '<div class="g-config g-config-page">',
+    '<div class="g-config">',
         '<section class="c-config">',
             '<section class="c-config-wapper">',
             '</section>',
@@ -93,8 +93,30 @@ var tpl_conf_position = [
     '</section>'
 ].join(''); 
 
+var tpl_config_section_cropper = [
+    '<section class="c-conf-section z-expand" style="display: block;">',
+        '<section class="c-conf-panel">',
+            '<div class="jcrop-panel-header" style="overflow: hidden">更换图片</div>',
+            '<div class="jcrop-panel">',
+                '<div class="jcrop-wrap">',
+                    '<img id="image" />',
+                '</div>',
+            '</div>',
+            '<div class="jcrop-setUp">',
+                '<ul>',
+                    '<li data-value="0" class="curr"> 自由</li>',
+                    '<li data-value="1"> 正方形</li>',
+                    '<li data-value="2"> 4:3</li>',
+                    '<li data-value="3"> 16:9</li>',
+                    '<li data-value="4"> 铺满</li>',
+                '</ul>',
+            '</div>',
+        '</section>',
+    '</section>'
+].join('');
+
 var tpl_com_container = [
-'<div class="f-abs c-c-container" ng-click="setCurrentComponent(component)" ng-attr-data-id="{{component.id}}">',
+'<div class="f-abs c-c-container" ng-click="setCurrentComponent(component)">',
     '<div class="tl-c"></div><div class="tr-c"></div><div class="bl-c"></div><div class="br-c"></div>',
 '</div>'
 ].join('');
@@ -282,7 +304,9 @@ var constants = {
         ]
     },
     confPage: [
-        '',
+        '<div config-page-header-directive></div>',
+        '<div config-page-background-directive></div>',
+        '<div config-page-section-directive></div>'
     ],
     confSingleImage: [
         '<div ng-model="currentComponent" conf-header></div>',
@@ -298,7 +322,7 @@ var constants = {
     ],
     confExternalLinks: [
         '<div ng-model="currentComponent" conf-header></div>',
-        '<div conf-externallinks></div>',
+        '<div conf-singletext></div>',
         '<div conf-facade></div>',
         '<div conf-position></div>',
     ]

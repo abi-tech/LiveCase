@@ -250,7 +250,7 @@ mainModule.directive('chooseList', function ($compile) {
 
 //<div dialog-options="data_dialog_anim" ui-dialog></div>
 var tpl_ui_dialog = [
-'<div class="u-dialog" style="top: 475px; height: 230px;">',
+'<div class="u-dialog" style="top: 200px; height: 230px;">',
     '<header class="u-dialog-head"></header>',
     '<section class="u-dialog-body"></section>',
 '</div>'
@@ -382,19 +382,19 @@ mainModule.directive('animationPicker', function ($compile) {
                 $fmt8.show();
                 element.append(ctx);
 
-                ctx.find("div.anime-in").on("mouseenter", function (e) {
-                    console.log('mouseenter');
-                    //animation: fadeInDown 0.8s backwards
-                    //$(this).css
-                    if ($(this).css) {
-
-                    }
-                    $(this).css("animation", "fadeInDown 0.8s backwards").one(function () {
-                        $(this).css("animation", "none");alert(1);
+                ctx.find("a.u-image-wrap").on("mouseenter", function (e) {
+                    var end = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                    var effect = $(this).data("id");
+                    $(this).find("div").css("animation", effect + " 0.8s backwards").one(end, function () {
+                        $(this).css("animation", "none");
                     });
-                }).on("mouseleave", function (e) {
-                    console.log('mouseleave');
-                    //$(this).css("animation", "none");
+                }).on("click", function (e) { console.log(e);
+                    var id = scope.currentComponent.id;
+                    var effect = $(this).data("id");
+                    var end = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+                    $(".g-editor div[data-id='" + id + "']").find("div:first div:first").css("animation", effect + " 1s").one(end, function () {
+                        $(this).css("animation", "none");
+                    });
                 });
             }
 

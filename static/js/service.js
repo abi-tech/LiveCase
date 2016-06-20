@@ -24,7 +24,9 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
             autoTurnPage: true,
             autoTurnPageDelay: 0,
             lockTurnPage: true,
+            active: true,
             components: [{
+                id: 1,
                 name: "图片",
                 type: "singleimage",
                 icon: "http://eng.liveapp.cn/web/img/component/singleimage.png",
@@ -35,7 +37,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 width: 640,
                 height: 535,
                 top: 0,
-                left: 217,
+                left: 0,
                 zIndex: 10000,
                 rotate: 0,
                 backgroundImage: "none",
@@ -49,6 +51,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 animIn: { "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1, "infinite": true },
                 animOut: { "type":"fadeOut", "typeName": "淡出", "name": "从右淡出", "effect": "fadeOutRight", "delay": 0, "duration": 1, "count": 1, "infinite": true }
             }, {
+                id: 2,
                 name: "文本",
                 type: "singletext",
                 icon: "http://eng.liveapp.cn/web/img/component/singletext.png",
@@ -59,7 +62,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 width: 418,
                 height: 80,
                 top: 422,
-                left: 217,
+                left: (640 - 418) / 2,
                 zIndex: 10000,
                 rotate: 0,
                 backgroundImage: "none",
@@ -73,6 +76,7 @@ mainModule.service('pageService', ['$rootScope', function (rootScope) {
                 animIn: { "type":"bounceIn", "typeName": "弹入", "name": "弹入", "effect": "bounceIn", "delay": 0, "duration": 1, "count": 1, "infinite": true },
                 animOut: { "type":"fadeOut", "typeName": "淡出", "name": "从右淡出", "effect": "fadeOutRight", "delay": 0, "duration": 1, "count": 1, "infinite": true }
             }, {
+                id: 3,
                 name: "按钮-链接",
                 type: "externallinks",
                 icon: "http://eng.liveapp.cn/web/img/component/externallinks.png",

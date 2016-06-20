@@ -236,28 +236,39 @@ mainModule.directive('globalConfig', function ($compile) {
             var options = eval(attrs.options) || scope.options;
             var $configWrapper = element.find("section.c-config-wapper");
             var scopes = [];
-            scope.$watch("currentPage", function (newValue, oldValue) { //console.log(scope);
-                if (newValue && newValue != null) {
-                    $configWrapper.empty();
-                }
-            });
+            // scope.$watch("currentPage.active", function (newValue, oldValue) { console.log(newValue);
+            //     if (newValue && newValue == true) {
+            //         $configWrapper.empty();
+            //         angular.forEach(scopes, function(data, index, array){
+            //             data.$destroy();
+            //         });
+            //         scopes.length = 0;
+            //         element.addClass("g-config-page");
+            //         $configWrapper.addClass("none");
+            //         render(constants.confPage);
+            //     }
+            // });
 
-            scope.$watch("currentComponent", function (newValue, oldValue) { console.log(scope);
-                if (newValue == null || newValue != oldValue) {
-                    $configWrapper.empty();
-                    angular.forEach(scopes, function(data, index, array){
-                        data.$destroy();
-                    });
-                    scopes.length = 0;
-                }
+            scope.$watch("currentComponent", function (newValue, oldValue) {
+                $configWrapper.empty();
+                angular.forEach(scopes, function(data, index, array){
+                    data.$destroy();
+                });
+                scopes.length = 0;
 
                 if (newValue && newValue != null && newValue != oldValue) {
+                    
+                    element.removeClass("g-config-page");
+                    $configWrapper.removeClass("none");
                     switch(newValue.type){
                         case "singleimage": render(constants.confSingleImage); break;
                         case "singletext": render(constants.confSingleText); break;
                         case "externallinks": render(constants.confExternalLinks); break;
                     }
-                    
+                }else{
+                    element.addClass("g-config-page");
+                    $configWrapper.addClass("none");
+                    render(constants.confPage);
                 }
             })
 
@@ -326,20 +337,64 @@ mainModule.directive('confPosition', function () {
     };
 });
 
-mainModule.directive('confSingleimage', function () {
+mainModule.directive('confSingleimage', function ($compile) {
     return {
         restrict: 'A',
         replace: true,
         link: function (scope, element, attrs) {
             var options = eval(attrs.options) || scope.options;     
+
+            var directives = [ 
+                '<div section-cropper-directive></div>' 
+            ];
+
+            function render(directives) {
+                angular.forEach(directives, function(data, index, array){
+                    var $content = $compile(data)(scope);
+                    element.append($content);
+                });
+            }
+            render(directives);
         }
     };
 });
 
+var tpl_singletext = [
+'<section class="c-conf-section z-expand" style="display: block;">',
+    '<section class="u-conf-section c-singletext">',
+        '<div class="c-conf-row">',
+            '<textarea placeholder="亲，在这里输入文本哦" ng-model="currentComponent.text"></textarea>',
+        '</div>',
+        '<div class="c-conf-row c-conf-row-1">',
+            '<ul class="u-tab">',
+                '<div ng-model="currentComponent.style.fontSize" ipr-fontsize></div>',
+                '<div ng-model="currentComponent.style.color" ipr-fontcolor></div>',
+                '<div ng-model="currentComponent.style.textAlign" ipr-textalign></div>',
+                '<div ng-model="currentComponent.style.lineHeight" ipr-lineheight></div>',
+            '</ul>',
+        '</div>',
+        '<div class="c-conf-row c-conf-row-2">',
+            '<div class="c-input-box box-lf">',
+                '<ul class="u-tab">',
+                    '<div ng-model="currentComponent.style.fontFamily" ipr-fontfamily></div>',
+                '</ul>',
+            '</div>',
+            '<div class="c-input-box box-rf">',
+                '<ul class="u-tab">',
+                    '<li class="selected"><a class="small"><div class="icon-x16 x-icon-b"></div></a></li>',
+                    '<li><a class="small"><div class="icon-x16 x-icon-i"></div></a></li>',
+                    '<li><a class="small"><div class="icon-x16 x-icon-u"></div></a></li>',
+                '</ul>',
+            '</div>',
+        '</div>',
+    '</section>',
+'</section>'
+].join('');
 mainModule.directive('confSingletext', function () {
     return {
         restrict: 'A',
         replace: true,
+        template: tpl_singletext,
         link: function (scope, element, attrs) {
             var options = eval(attrs.options) || scope.options;     
         }

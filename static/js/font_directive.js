@@ -18,7 +18,6 @@ mainModule.directive('iprFontsize', function() {
     return {
         restrict: 'AE',
         require: 'ngModel',
-        scope: {},
         replace: true,
         template: template.compile(tpl_config_fontsize)(data_config_fontsize),
         link: function(scope, element, attrs, ngModelController) { 
@@ -62,7 +61,6 @@ mainModule.directive('iprFontcolor', function() {
     return {
         restrict: 'AE',
         require: 'ngModel',
-        scope: {},
         replace: true,
         template: tpl_config_fontcolor,
         link: function(scope, element, attrs, ngModelController) { 
@@ -103,7 +101,7 @@ mainModule.directive('iprFontcolor', function() {
 var tpl_config_textalign = [
 '<li class="dropdown text-align">',
     '<a class="small"><div class="icon-x16 x-icon-text-align x-icon-center"></div></a>',
-    '<ul class="dropdown-list" type="text-align-list" style="display: none; left:0;">',
+    '<ul class="dropdown-list" type="text-align-list">',
         '<li value="left"><a class="small"><div class="icon-x16 x-icon-left"></div></a></li>',
         '<li value="center"><a class="small"><div class="icon-x16 x-icon-center"></div></a></li>',
         '<li value="right"><a class="small"><div class="icon-x16 x-icon-right"></div></a></li>',
@@ -116,7 +114,6 @@ mainModule.directive('iprTextalign', function() {
     return {
         restrict: 'AE',
         require: 'ngModel',
-        scope: {},
         replace: true,
         template: tpl_config_textalign,
         link: function(scope, element, attrs, ngModelController) { 
@@ -162,7 +159,6 @@ mainModule.directive('iprFontstyle', function() {
     return {
         restrict: 'AE',
         require: 'ngModel',
-        scope: {},
         replace: true,
         template: tpl_config_fontstyle,
         link: function(scope, element, attrs, ngModelController) { 
@@ -198,5 +194,103 @@ mainModule.directive('iprFontstyle', function() {
 
             init();
  		}
+    };
+});
+
+var tpl_config_lineheight = [
+'<li class="dropdown line-height">',
+    '<a class="small"><div class="icon-x16 x-icon-line-height"></div></a>',
+    '<ul class="dropdown-list" type="line-height-list" style="display: none;">',
+        '{{ each list as item i}}',
+        '<li value="{{ item }}">{{ item }}</li>',
+        '{{ /each }}',
+    '</ul>',
+'</li>'
+].join('');
+
+var data_config_lineheight = { 
+    list: [ 1.0, 1.15, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0 ]
+};
+
+mainModule.directive('iprLineheight', function() {
+    return {
+        restrict: 'AE',
+        require: 'ngModel',
+        replace: true,
+        template: template.compile(tpl_config_lineheight)(data_config_lineheight),
+        link: function(scope, element, attrs, ngModelController) { 
+            ngModelController.$render = function() {
+                var val = ngModelController.$viewValue; 
+                $("ul.dropdown-list li", element).removeClass("selected");
+                $('ul.dropdown-list li[value="' + val + '"]', element).addClass("selected");
+            }
+
+            function updateModel(val) {
+                ngModelController.$setViewValue(val);
+                ngModelController.$render();
+            }
+
+            var init = function () { 
+                element.on('click', function(){
+                    $("ul.dropdown-list", element).toggle();
+                });
+
+                $("ul.dropdown-list li", element).on('click', function(){
+                    var val = $(this).attr("value");
+                    updateModel(val);
+                });
+            }
+
+            init();
+        }
+    };
+});
+
+var tpl_config_fontfamily = [
+'<li class="dropdown font-face">',
+    '<a class="small"><div class="icon-x16 x-icon-display x-icon-SimHei"></div></a>',
+    '<ul class="dropdown-list" type="font-list" style="display: none;">',
+        '{{ each list as item i}}',
+        '<li class="x-icon-{{ item }}" value="{{ item }}"></li>',
+        '{{ /each }}',
+    '</ul>',
+'</li>'
+].join('');
+
+var data_config_fontfamily = { 
+    list: [ "SimHei", "MFShangHei_Noncommercial-ExLight", "maobi-Regular", "SentyMaruko", "DFPWaWaW5" ]
+};
+
+mainModule.directive('iprFontfamily', function() {
+    return {
+        restrict: 'AE',
+        require: 'ngModel',
+        replace: true,
+        template: template.compile(tpl_config_fontfamily)(data_config_fontfamily),
+        link: function(scope, element, attrs, ngModelController) { 
+            ngModelController.$render = function() {
+                var val = ngModelController.$viewValue; 
+                $("ul.dropdown-list li", element).removeClass("selected");
+                $('ul.dropdown-list li[value="' + val + '"]', element).addClass("selected");
+            }
+
+            function updateModel(val) {
+                ngModelController.$setViewValue(val);
+                ngModelController.$render();
+            }
+
+            var init = function () { 
+                element.on('click', function(){
+                    $("ul.dropdown-list", element).toggle();
+                });
+
+                $("ul.dropdown-list li", element).on('click', function(){
+                    var val = $(this).attr("value");
+                    updateModel(val);
+                });
+            }
+
+            init();
+        }
     };
 });

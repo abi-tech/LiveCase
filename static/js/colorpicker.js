@@ -54,7 +54,7 @@
 	]};
 
 	var tpl_colorpicker_wrapper = [
-	'<div class="u-colorpicker f-ml-6" style="position:relative;overflow:visible;">',
+	'<div class="u-colorpicker f-ml-6" style="overflow:visible;">',
 	    '<input type="text" style="color: rgb(0, 0, 0); background: rgb(204, 204, 204);">',
 	    '<a href="javascript:void(0);" class="small"><i class="icon-x20 icon-x20-color"></i></a>',
 	'</div>'

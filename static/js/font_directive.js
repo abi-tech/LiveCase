@@ -51,7 +51,7 @@ mainModule.directive('iprFontsize', function() {
 var tpl_config_fontcolor = [
 '<li class="font-color">',
     '<input class="dropdown font-color"/>',
-    '<div class="font-color-layer"></div>',
+    '<div style="position:relative;"><div class="font-color-layer"></div></div>',
     '<a class="small"><div class="icon-x16 x-icon-font-color"></div></a>',
 '</li>'
 ].join('');
@@ -78,7 +78,7 @@ mainModule.directive('iprFontcolor', function() {
             var init = function () { 
             	colorPicker = $(".dropdown", element).colorpicker({
                     showIcon: false,
-                    offset: { top: 26,left: -70 },
+                    offset: { top: 26, left: 0 },
             		onChange: function(color){
             			ngModelController.$setViewValue(color);
 	                	ngModelController.$render();
@@ -99,13 +99,13 @@ mainModule.directive('iprFontcolor', function() {
 });
 
 var tpl_config_textalign = [
-'<li class="dropdown text-align">',
+'<li class="dropdown text-size">',
     '<a class="small"><div class="icon-x16 x-icon-text-align x-icon-center"></div></a>',
-    '<ul class="dropdown-list" type="text-align-list">',
-        '<li value="left"><a class="small"><div class="icon-x16 x-icon-left"></div></a></li>',
-        '<li value="center"><a class="small"><div class="icon-x16 x-icon-center"></div></a></li>',
-        '<li value="right"><a class="small"><div class="icon-x16 x-icon-right"></div></a></li>',
-        '<li value="justify"><a class="small"><div class="icon-x16 x-icon-justify"></div></a></li>',
+    '<ul class="dropdown-list" type="text-align-list" style="height: 121px;">',
+        '<li value="left"><a style="background: none; border:none; padding:0;"><div class="icon-x16 x-icon-left"></div></a></li>',
+        '<li value="center"><a style="background: none; border:none; padding:0;"><div class="icon-x16 x-icon-center"></div></a></li>',
+        '<li value="right"><a style="background: none; border:none; padding:0;"><div class="icon-x16 x-icon-right"></div></a></li>',
+        '<li value="justify"><a style="background: none; border:none; padding:0;"><div class="icon-x16 x-icon-justify"></div></a></li>',
     '</ul>',
 '</li>'
 ].join('');
@@ -147,7 +147,7 @@ mainModule.directive('iprTextalign', function() {
 var tpl_config_fontstyle = [
 '<li class="dropdown font-style">',
     '<a class="small"><div class="icon-x16 x-icon-font-style"></div></a>',
-    '<ul class="dropdown-list" type="text-align-list" style="display: none; left:0;">',
+    '<ul type="text-align-list" style="display: none; left:0;">',
         '<li key="fontWeight"><a class="small"><div class="icon-x16 x-icon-b"></div></a></li>',
         '<li key="fontStyle"><a class="small"><div class="icon-x16 x-icon-i"></div></a></li>',
         '<li key="textDecoration"><a class="small"><div class="icon-x16 x-icon-u"></div></a></li>',
@@ -162,6 +162,7 @@ mainModule.directive('iprFontstyle', function() {
         replace: true,
         template: tpl_config_fontstyle,
         link: function(scope, element, attrs, ngModelController) { 
+            var type = attrs.type; 
         	ngModelController.$render = function() { 
 
         	}
@@ -174,11 +175,11 @@ mainModule.directive('iprFontstyle', function() {
             }
 
             var init = function () { 
-            	element.on('click', function(){
-            		$("ul.dropdown-list", element).toggle();
+                element.on('click', function(){
+            		$("ul", element).toggle();
             	});
 
-            	$("ul.dropdown-list li", element).on('click', function(){
+            	$("li", element).on('click', function(){
                     var isSelected = $(this).hasClass("selected");
             		var key = $(this).attr("key");
                     var value;
@@ -190,6 +191,14 @@ mainModule.directive('iprFontstyle', function() {
                     $(this).toggleClass("selected");
             		updateModel(key, value);
             	});
+
+                if (type === "dropdown") {
+                    $("ul", element).addClass("dropdown-list");
+                    
+                }else{
+                    $("ul", element).addClass("u-tab"); 
+                    element.replaceWith($("ul", element));
+                }
             }
 
             init();

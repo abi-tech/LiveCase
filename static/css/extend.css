@@ -1376,8 +1376,6 @@ div .oni-scrollbar-arrow-down b {
 }
 .c-singletext .dropdown-list {
 	position: absolute;
-	left: 0;
-	right: 0;
 	top: 26px;
 	z-index: 100;
 	text-align: center;
@@ -1510,15 +1508,15 @@ div .oni-scrollbar-arrow-down b {
 	width: 69px;
 }
 .c-singletext.u-conf-section .c-conf-row-1 [type=text-align-list] {
-	left: 139px;
+	/*left: 139px;*/
 	width: 69px;
 }
 .c-singletext.u-conf-section .c-conf-row-1 [type=line-height-list] {
-	left: 209px;
+	/*left: 209px;*/
 	width: 69px;
 }
 .c-singletext.u-conf-section .c-conf-row-1 .font-color {
-	position: relative;
+	/*position: relative;*/
 }
 .c-singletext.u-conf-section .c-conf-row-1 .font-color input {
 	position: absolute;
@@ -1963,11 +1961,11 @@ div .oni-scrollbar-arrow-down b {
 	left: -1px;
 }
 .c-externallinks-edit [type=text-align-list] {
-	left: 139px;
+	/*left: 139px;*/
 	width: 69px;
 }
 .c-externallinks-edit [type=font-style-list] {
-	left: 209px;
+	/*left: 209px;*/
 	width: 68px;
 }
 .c-externallinks-edit .x-icon-left,

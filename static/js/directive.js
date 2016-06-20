@@ -71,22 +71,34 @@ mainModule.directive('editorDirective',[ '$rootScope', function (rootScope) {
         replace : true,
         templateUrl : 'tpls/editor.html',
         link : function (scope, element, attrs) {
-            rootScope.originWidth = 384;
-            rootScope.originHeight = 624;
+            rootScope.originWidth = 640;
+            rootScope.originHeight = 1040;
+            rootScope.originScale = 1;
 
-            var editorHeight = $(document).height() - 120 - 40;
-            var editorScale = editorHeight / rootScope.originHeight;
-            var editorWidth = rootScope.originWidth * editorScale;
+            rootScope.editorWidth = 384;
+            rootScope.editorHeight = 624;
+            rootScope.editorScale = 0.6;
 
-            rootScope.editorScale = editorScale;
-            rootScope.editorWidth = editorWidth;
-            rootScope.editorHeight = editorHeight;
+            var tempHeight = $(document).height() - 120 - 40;
+
+            if (tempHeight < rootScope.editorHeight) {
+                rootScope.editorScale = tempHeight / rootScope.originHeight;
+                rootScope.editorWidth = rootScope.originWidth * rootScope.editorScale;
+                rootScope.editorHeight = rootScope.originHeight * rootScope.editorScale;
+            }
 
             $(".m-editor", element).on('click', function(){
                 scope.currentComponent = null;
                 $(".c-c-container").removeClass("u-comChoose");
                 scope.$apply();
             });
+
+            $("#editorFrame")
+                .css("font-size",  rootScope.editorScale + "rem")
+                .css("margin-left", -rootScope.editorWidth / 2)
+                .css("margin-top", -rootScope.editorHeight / 2 - 20)
+                .css("width", rootScope.editorWidth)
+                .css("height", rootScope.editorHeight);
         }
     };
 }]);

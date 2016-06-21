@@ -1,0 +1,90 @@
+<section class="c-conf-section z-expand" style="display: block;">
+    <section class="c-externallinks-edit">
+        <div class="c-conf-row" style="display: block;">
+            <div class="c-conf-row">
+                <label class="c-input-label">网址链接</label>
+            </div>
+            <div class="c-conf-row">
+                <input ng-model="currentComponent.address" class="address" placeholder="请输入链接地址，如http://www.liveapp.cn"></div>
+        </div>
+        <div class="c-conf-row" style="display: none;">
+            <div class="c-conf-row">
+                <label class="c-input-label">电话号码</label>
+            </div>
+            <div class="c-conf-row">
+                <input ng-model="currentComponent.phone" class="phone" type="text" placeholder="请输入电话号码，如4000-168-906"></div>
+        </div>
+        <div class="c-externallinks-pop" style="display: none;">
+            <div class="c-externallinks-layer">
+                <div class="c-conf-row">
+                    <div class="u-image-wrap">
+                        <img ng-src="{{ currentComponent.layer }}" />
+                    </div>
+                </div>
+                <ul class="u-layer-change-btn-wrap">
+                    <li class="change-btn-image">更换</li>
+                    <li class="change-btn-pre">预览</li>
+                </ul>
+            </div>
+        </div>
+        <div class="c-conf-row redirectList" style="display: none;">
+            <div class="c-conf-row">
+                <label class="c-input-label">跳转至</label>
+            </div>
+            <div class="c-dropdown-row">
+                <select>
+                    <option value="0" label="第 1 页">第 1 页</option>
+                </select>
+            </div>
+        </div>
+        <div class="c-externallinks-switch">
+            <div class="c-conf-row">
+                <div class="c-switch-box">
+                    <ul class="u-tab">
+                        <li>
+                            <a href="javascript:void(0);" class="z-active">文字按钮</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">图标按钮</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="c-externallinks-setting">
+            <div class="c-input-row" style="display: block;">
+                <div class="c-input-wrap">
+                    <input ng-model="currentComponent.btnText" type="text" class="btnTxt"></div>
+                <div class="c-font-setting">
+                    <ul>
+                        <div ng-model="currentComponent.style.fontSize" ipr-fontsize></div>
+                        <div ng-model="currentComponent.style.color" ipr-fontcolor></div>
+                        <div ng-model="currentComponent.style.textAlign" ipr-textalign></div>
+                        <div ng-model="currentComponent.style" ipr-fontstyle></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="u-image-row" style="display: none;">
+                <div class="u-image-wrap">
+                    <div class="u-image-small">
+                        <div class="u-image-icon"></div>
+                    </div>
+                </div>
+                <div class="u-image-change-btn">更换图标</div>
+            </div>
+        </div>
+
+        <div id="externallinksHTMLRender" class="f-hide">
+            <div class="c-externallinks content" ms-css-webkit-animation="{{comInsList[12].animeShowClass}}" ms-css-animation="{{comInsList[12].animeShowClass}}" inside-styles="" src="/static/images/components/externallinks/layer-default.png" background-type="1" background-layout="center" style="border-color: rgb(68, 68, 68); border-radius: 50rem; transform: rotate(0deg); opacity: 1; border-width: 0px; background-image: none; background-color: rgba(0, 0, 0, 0.8);">
+                <a class="f-fix link" href="javascript:;" address="" phone="">
+                    <div class="btn-txt" style="color: rgb(255, 255, 255); font-size: 1.625em;">
+                        <div class="btn-info" style="text-align: center;">点击打开</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="c-conf-panel"></div>
+</section>

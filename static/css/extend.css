@@ -1962,6 +1962,7 @@ div .oni-scrollbar-arrow-down b {
 }
 .c-externallinks-edit [type=text-align-list] {
 	/*left: 139px;*/
+	position: static;
 	width: 69px;
 }
 .c-externallinks-edit [type=font-style-list] {
@@ -2090,12 +2091,12 @@ div .oni-scrollbar-arrow-down b {
 	cursor: default;
 }
 .c-externallinks-layer .u-layer-change-btn-wrap .change-btn-image {
-	background-image: url(/static/images/components/singletext/externallinks/change.png);
+	background-image: url(/static/images/components/externallinks/change.png);
 	background-position: 40% 50%;
 	text-indent: 20px;
 }
 .c-externallinks-edit .c-externallinks-layer .u-layer-change-btn-wrap .change-btn-pre {
-	background-image: url(/static/images/components/singletext/externallinks/preview.png);
+	background-image: url(/static/images/components/externallinks/preview.png);
 	background-position: 40% 50%;
 }
 .c-externallinks-edit .c-externallinks-layer .u-layer-change-btn-wrap .change-btn-pre.disable {
@@ -2112,7 +2113,6 @@ div .oni-scrollbar-arrow-down b {
 	background: linear-gradient(#fbfbfb, #e1e1e1);
 }
 .c-externallinks-edit .c-externallinks-setting .c-font-setting li {
-	position: relative;
 	border-top: 1px solid #ccc;
 	width: 25%;
 	float: left;

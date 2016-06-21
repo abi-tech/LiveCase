@@ -147,7 +147,7 @@ mainModule.directive('iprTextalign', function() {
 var tpl_config_fontstyle = [
 '<li class="dropdown font-style">',
     '<a class="small"><div class="icon-x16 x-icon-font-style"></div></a>',
-    '<ul type="text-align-list" style="display: none; left:0;">',
+    '<ul class="dropdown-list" type="text-align-list" style="display: none; left:0;">',
         '<li key="fontWeight"><a class="small"><div class="icon-x16 x-icon-b"></div></a></li>',
         '<li key="fontStyle"><a class="small"><div class="icon-x16 x-icon-i"></div></a></li>',
         '<li key="textDecoration"><a class="small"><div class="icon-x16 x-icon-u"></div></a></li>',
@@ -191,14 +191,6 @@ mainModule.directive('iprFontstyle', function() {
                     $(this).toggleClass("selected");
             		updateModel(key, value);
             	});
-
-                if (type === "dropdown") {
-                    $("ul", element).addClass("dropdown-list");
-                    
-                }else{
-                    $("ul", element).addClass("u-tab"); 
-                    element.replaceWith($("ul", element));
-                }
             }
 
             init();

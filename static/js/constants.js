@@ -322,7 +322,7 @@ var constants = {
     ],
     confExternalLinks: [
         '<div ng-model="currentComponent" conf-header></div>',
-        '<div conf-singletext></div>',
+        '<div ng-model="currentComponent" conf-externallinks></div>',
         '<div conf-facade></div>',
         '<div conf-position></div>',
     ]

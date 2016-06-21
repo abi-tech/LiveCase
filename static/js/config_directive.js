@@ -397,12 +397,115 @@ mainModule.directive('confSingletext', function () {
     };
 });
 
+
+
 mainModule.directive('confExternallinks', function () {
     return {
         restrict: 'A',
         replace: true,
-        link: function (scope, element, attrs) {
-            var options = eval(attrs.options) || scope.options;     
+        templateUrl: "tpls/components/externallinks_config.html",
+        require: "ngModel",
+        link: function (scope, element, attrs, ngModelController) {
+            //var options = eval(attrs.options) || scope.options;   
+            var tabItem = $(".c-externallinks-switch ul.u-tab li a", element)
+            var textBottonPanel = $(".c-externallinks-setting>div.c-input-row", element);
+            var iconBottonPanel = $(".c-externallinks-setting>div.u-image-row", element);
+            var addressRow = $(".c-externallinks-edit>div:eq(0)", element);
+            var phoneRow = $(".c-externallinks-edit>div:eq(1)", element);
+            var layerRow = $(".c-externallinks-edit>div:eq(2)", element);
+            var linkRow = $(".c-externallinks-edit>div:eq(3)", element);
+            var layerImage = $(".c-externallinks-pop img", element);
+            var btnChangeImage = $(".c-externallinks-pop .change-btn-image", element);
+            var btnPreviewImage = $(".c-externallinks-pop .change-btn-pre", element);
+            var btnChangeIcon = $(".u-image-change-btn", iconBottonPanel);
+            var linkSelect = $("select", linkRow);
+
+            var activeClass = "z-active";
+            ngModelController.$render = function (argument) {
+                var viewValue = ngModelController.$viewValue;
+
+                $(".u-image-icon", iconBottonPanel).css("background-image", "url('" + viewValue.btnIcon + "')");
+                
+                switch(viewValue.btnType){
+                    case "address": initForAddress(viewValue); break;
+                    case "phone": initForPhone(viewValue); break;
+                    case "layer": initForLayer(viewValue); break;
+                    case "link": initForLink(viewValue); break;
+                }
+                //控制激活模式 
+                tabItem.removeClass(activeClass);
+                switch(viewValue.btnActive){
+                    case "text": $(tabItem[0]).addClass(activeClass); textBottonPanel.show(); iconBottonPanel.hide(); break;
+                    case "icon": $(tabItem[1]).addClass(activeClass); textBottonPanel.hide(); iconBottonPanel.show(); break;
+                }
+            }
+
+            $(".c-externallinks-switch ul.u-tab li a", element).on("click", function (e) {
+                var index = tabItem.index($(this));
+                tabItem.removeClass(activeClass);
+                $(this).addClass(activeClass);
+                switch(index){
+                    case 0: textBottonPanel.show(); iconBottonPanel.hide(); ngModelController.$viewValue.btnActive = "text"; break;
+                    case 1: textBottonPanel.hide(); iconBottonPanel.show(); ngModelController.$viewValue.btnActive = "icon"; break;
+                }
+            });
+
+            function initForAddress(viewValue){
+                addressRow.show();  
+                phoneRow.hide();  
+                layerRow.hide(); 
+                linkRow.hide();
+            }
+
+            function initForPhone(viewValue){
+                addressRow.hide();  
+                phoneRow.show();  
+                layerRow.hide(); 
+                linkRow.hide();
+            }
+
+            function initForLayer(viewValue){
+                addressRow.hide();  
+                phoneRow.hide();  
+                layerRow.show(); 
+                linkRow.hide();
+            }
+
+            function initForLink(viewValue){
+                addressRow.hide();  
+                phoneRow.hide();  
+                layerRow.hide(); 
+                linkRow.show();
+            }
+
+            function init(viewValue) {
+                btnChangeImage.on('click', function (e) {
+                    alert("btnChangeImage");
+                });
+
+                btnPreviewImage.on('click', function (e) {
+                    var isPop = $("#editorFrame .previewPopLayer").length > 0? true : false;
+                    if (isPop) { 
+                        $("#editorFrame .previewPopLayer").remove();
+                        btnPreviewImage.text("预览");
+                        return;
+                    }
+
+                    var htmlLayer = $('<div class="previewPopLayer"><img src="'+　ngModelController.$viewValue.layer +'"></div>');
+                    $("#editorFrame").append(htmlLayer);
+                    btnPreviewImage.text("取消");
+                    htmlLayer.on('click', function (e) {
+                        e.stopPropagation();
+                        htmlLayer.remove();
+                    });
+                });
+
+                btnChangeIcon.on('click', function (e) {
+                    alert("btnChangeIcon");
+                });
+            }
+            
+            init();
         }
     };
 });
